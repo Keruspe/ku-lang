@@ -4,6 +4,10 @@ global:
     ku_string_is_empty;
     ku_string_read_char;
     ku_string_free;
+    ku_file_new;
+    ku_file_is_empty;
+    ku_file_read_char;
+    ku_file_free;
 local:
     *;
 };
