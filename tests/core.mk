@@ -17,6 +17,7 @@
 
 TESTS +=                       \
 	tests/core/test-file   \
+	tests/core/test-stream \
 	tests/core/test-string \
 	$(NULL)
 
@@ -26,6 +27,14 @@ tests_core_test_file_SOURCES = \
 
 tests_core_test_file_LDADD =  \
 	$(libku_core_la_file) \
+	$(NULL)
+
+tests_core_test_stream_SOURCES = \
+	tests/core/test-stream.c \
+	$(NULL)
+
+tests_core_test_stream_LDADD = \
+	$(libku_core_la_file)  \
 	$(NULL)
 
 tests_core_test_string_SOURCES = \
