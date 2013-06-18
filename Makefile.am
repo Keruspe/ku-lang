@@ -39,9 +39,17 @@ bin_PROGRAMS =
 pkginclude_HEADERS =
 lib_LTLIBRARIES =
 
+noinst_PROGRAMS = 
+
+TESTS = 
+
 # Real stuff goes in these subfiles
 
 include src/core.mk
+
+include tests/core.mk
+
+noinst_PROGRAMS += $(TESTS)
 
 # Maintainance stuff
 
