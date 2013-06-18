@@ -21,7 +21,7 @@
 
 #include <string.h>
 
-KuString *
+KU_VISIBLE KuString *
 ku_string_new (const char *string)
 {
     if (!string)
@@ -35,13 +35,13 @@ ku_string_new (const char *string)
     return s;
 }
 
-bool
+KU_VISIBLE bool
 ku_string_is_empty (KuString *string)
 {
     return (!string || string->pos >= string->length);
 }
 
-char
+KU_VISIBLE char
 ku_string_read_char (KuString *string)
 {
     if (ku_string_is_empty (string))
@@ -50,7 +50,7 @@ ku_string_read_char (KuString *string)
     return string->string[string->pos++];
 }
 
-void
+KU_VISIBLE void
 ku_string_free (KuString *string)
 {
     if (string)

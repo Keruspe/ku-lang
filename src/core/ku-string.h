@@ -20,6 +20,10 @@
 #ifndef __KU_STRING_H__
 #define __KU_STRING_H__
 
+#ifdef KU_COMPILATION
+#include "config.h"
+#endif
+
 #include <stdbool.h>
 #include <stdlib.h>
 

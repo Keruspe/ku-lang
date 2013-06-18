@@ -1,0 +1,9 @@
+LIBKU_CORE_1 {
+global:
+    ku_string_new;
+    ku_string_is_empty;
+    ku_string_read_char;
+    ku_string_free;
+local:
+    *;
+};
