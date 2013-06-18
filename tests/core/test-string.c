@@ -28,7 +28,7 @@ test_ku_string_full (void)
 }
 
 int
-main (int __attribute__((unused)) argc, char __attribute__((unused)) *argv[]) {
+main (int KU_UNUSED argc, char KU_UNUSED *argv[]) {
     test_ku_string_null ();
     test_ku_string_full ();
     return 0;

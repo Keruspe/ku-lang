@@ -95,6 +95,7 @@ CC_CHECK_LDFLAGS_APPEND([ \
                           -Wl,--gc-sections \
                         ])
 
+AC_DEFINE_UNQUOTED([KU_UNUSED], [__attribute__((unused))], [Unused variable])
 AC_DEFINE_UNQUOTED([KU_VISIBLE], [__attribute__((visibility("default")))], [Export symbol])
 
 # GETTEXT_PACKAGE=$PACKAGE_NAME
