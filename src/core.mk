@@ -37,6 +37,7 @@ src_core_libku_core_la_SOURCES =      \
 	$(libku_core_public_headers)  \
 	$(libku_core_private_headers) \
 	src/core/ku-file.c            \
+	src/core/ku-stream.c          \
 	src/core/ku-string.c          \
 	$(NULL)
 
