@@ -5,7 +5,7 @@
 static void
 test_ku_string_null (void)
 {
-    KuString *s = ku_string_new (0);
+    KuString *s = ku_string_new (NULL);
     assert (ku_string_is_empty (s));
     ku_string_free (s);
 }

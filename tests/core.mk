@@ -16,7 +16,16 @@
 # along with ku.  If not, see <http://www.gnu.org/licenses/>.
 
 TESTS +=                       \
+	tests/core/test-file   \
 	tests/core/test-string \
+	$(NULL)
+
+tests_core_test_file_SOURCES = \
+	tests/core/test-file.c \
+	$(NULL)
+
+tests_core_test_file_LDADD =  \
+	$(libku_core_la_file) \
 	$(NULL)
 
 tests_core_test_string_SOURCES = \
