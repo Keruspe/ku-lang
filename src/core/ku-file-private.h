@@ -27,7 +27,6 @@
 struct _KuFile
 {
     FILE *file;
-    bool  eof;
     char  read;
 };
 
