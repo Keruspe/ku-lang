@@ -19,28 +19,29 @@
 
 #include "ku-stream-private.h"
 
-KU_VISIBLE KuStream *
-ku_stream_new_from_file (KuFile *file)
+static KuStream *
+ku_stream_new_full (KuFile   *file,
+                    KuString *string)
 {
-    if (!file)
+    if (!file && !string)
         return NULL;
 
     KuStream *s = (KuStream *) malloc (sizeof (KuStream));
     s->file = file;
-    s->string = NULL;
+    s->string = string;
     return s;
+}
+
+KU_VISIBLE KuStream *
+ku_stream_new_from_file (KuFile *file)
+{
+    return ku_stream_new_full (file, NULL);
 }
 
 KU_VISIBLE KuStream *
 ku_stream_new_from_string (KuString *string)
 {
-    if (!string)
-        return NULL;
-
-    KuStream *s = (KuStream *) malloc (sizeof (KuStream));
-    s->file = NULL;
-    s->string = string;
-    return s;
+    return ku_stream_new_full (NULL, string);
 }
 
 KU_VISIBLE KuStream *
