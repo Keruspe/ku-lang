@@ -1,6 +1,7 @@
 #include "ku-file.h"
 
 #include <assert.h>
+#include <string.h>
 
 static void
 test_ku_file_null (void)
@@ -47,11 +48,13 @@ test_ku_file_full (void)
     ku_file_write (rwf, "abc");
     ku_file_free (rwf);
     KuFile *rf = ku_file_new (filename, READ);
-    ku_file_read_char (rf);
-    ku_file_read_char (rf);
-    ku_file_read_char (rf);
+    ku_file_skip (rf, 3);
     test_ku_file_read_full (rf);
     ku_file_free (rf);
+    KuFile *df = ku_file_new (filename, WRITE);
+    ku_file_delete (&df);
+    assert (df == NULL);
+    assert (ku_file_new (filename, READ) == NULL);
 }
 
 int
