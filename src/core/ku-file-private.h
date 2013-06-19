@@ -26,8 +26,9 @@
 
 struct _KuFile
 {
-    FILE *file;
-    char  read;
+    FILE      *file;
+    char       read;
+    KuFileMode mode;
 };
 
 #endif /*__KU_FILE_PRIVATE_H__*/

@@ -19,18 +19,34 @@
 
 #include "ku-file-private.h"
 
+static const char *
+ku_file_mode_to_mode (KuFileMode mode)
+{
+    switch (mode)
+    {
+        case READ_WRITE:
+            return "rw+";
+        case WRITE:
+            return "w+";
+        default:
+            return "r+";
+    }
+}
+
 KU_VISIBLE KuFile *
-ku_file_new (const char *filename)
+ku_file_new (const char *filename,
+             KuFileMode  mode)
 {
     if (!filename)
         return NULL;
 
-    FILE *f = fopen (filename, "r+");
+    FILE *f = fopen (filename, ku_file_mode_to_mode (mode));
     if (!f)
         return NULL;
 
     KuFile *file = (KuFile *) malloc (sizeof (KuFile));
     file->file = f;
+    file->mode = mode;
     file->read = EOF;
     return file;
 }
@@ -38,7 +54,7 @@ ku_file_new (const char *filename)
 KU_VISIBLE bool
 ku_file_is_empty (KuFile *file)
 {
-    if (!file)
+    if (!file || !(file->mode & READ))
         return true;
 
     if (file->read != EOF)
@@ -62,8 +78,8 @@ ku_file_read_char (KuFile *file)
 void ku_file_write (KuFile     *file,
                     const char *content)
 {
-    if (file && content)
-        fprintf (file->file, content);
+    if (file && content && (file->mode & WRITE))
+        fprintf (file->file, "%s", content);
 }
 
 KU_VISIBLE void

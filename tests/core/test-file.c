@@ -5,7 +5,7 @@
 static void
 test_ku_file_null (void)
 {
-    KuFile *f = ku_file_new (NULL);
+    KuFile *f = ku_file_new (NULL, READ);
     assert (ku_file_is_empty (f));
     ku_file_free (f);
 }
@@ -13,7 +13,7 @@ test_ku_file_null (void)
 static void
 test_ku_file_full (void)
 {
-    KuFile *f = ku_file_new ("tests/data/test-file.txt");
+    KuFile *f = ku_file_new ("tests/data/test-file.txt", READ);
     assert (!ku_file_is_empty (f));
     assert (ku_file_read_char (f) == 'a');
     assert (ku_file_read_char (f) == 'b');

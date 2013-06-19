@@ -29,7 +29,14 @@
 
 typedef struct _KuFile KuFile;
 
-KuFile *ku_file_new (const char *filename);
+typedef enum {
+    READ =  1 << 0,
+    WRITE = 1 << 1,
+    READ_WRITE = READ|WRITE
+} KuFileMode;
+
+KuFile *ku_file_new (const char *filename,
+                     KuFileMode  mode);
 
 bool ku_file_is_empty  (KuFile *file);
 char ku_file_read_char (KuFile *file);
