@@ -19,8 +19,6 @@
 
 #include "ku-string-private.h"
 
-#include <string.h>
-
 KU_VISIBLE KuString *
 ku_string_new (const char *string)
 {

@@ -13,6 +13,7 @@ global:
     ku_file_new;
     ku_file_is_empty;
     ku_file_read_char;
+    ku_file_write;
     ku_file_free;
 local:
     *;

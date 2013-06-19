@@ -75,8 +75,9 @@ ku_file_read_char (KuFile *file)
     return read;
 }
 
-void ku_file_write (KuFile     *file,
-                    const char *content)
+KU_VISIBLE void
+ku_file_write (KuFile     *file,
+               const char *content)
 {
     if (file && content && (file->mode & WRITE))
         fprintf (file->file, "%s", content);
