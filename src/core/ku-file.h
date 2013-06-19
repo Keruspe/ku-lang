@@ -34,6 +34,9 @@ KuFile *ku_file_new (const char *filename);
 bool ku_file_is_empty  (KuFile *file);
 char ku_file_read_char (KuFile *file);
 
+void ku_file_write (KuFile     *file,
+                    const char *content);
+
 void ku_file_free (KuFile *file);
 
 #endif /*__KU_FILE_H__*/

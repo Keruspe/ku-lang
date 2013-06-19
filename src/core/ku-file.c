@@ -59,6 +59,13 @@ ku_file_read_char (KuFile *file)
     return read;
 }
 
+void ku_file_write (KuFile     *file,
+                    const char *content)
+{
+    if (file && content)
+        fprintf (file->file, content);
+}
+
 KU_VISIBLE void
 ku_file_free (KuFile *file)
 {
