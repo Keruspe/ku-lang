@@ -19,6 +19,9 @@
 
 #include "ku-file-private.h"
 
+#include <string.h>
+#include <unistd.h>
+
 static const char *
 ku_file_mode_to_mode (KuFileMode mode)
 {
@@ -46,6 +49,7 @@ ku_file_new (const char *filename,
 
     KuFile *file = (KuFile *) malloc (sizeof (KuFile));
     file->file = f;
+    file->filename = strdup (filename);
     file->mode = mode;
     file->read = EOF;
     return file;
@@ -76,6 +80,14 @@ ku_file_read_char (KuFile *file)
 }
 
 KU_VISIBLE void
+ku_file_skip (KuFile       *file,
+              unsigned int count)
+{
+    for (unsigned int i = 0; i < count; ++i)
+        ku_file_read_char (file);
+}
+
+KU_VISIBLE void
 ku_file_write (KuFile     *file,
                const char *content)
 {
@@ -83,12 +95,32 @@ ku_file_write (KuFile     *file,
         fprintf (file->file, "%s", content);
 }
 
-KU_VISIBLE void
-ku_file_free (KuFile *file)
+static void
+ku_file_free_full (KuFile *file,
+                   bool    delete)
 {
     if (file)
     {
         fclose (file->file);
+        if (delete)
+            unlink (file->filename);
+        free (file->filename);
         free (file);
     }
+}
+
+KU_VISIBLE void
+ku_file_delete (KuFile **file)
+{
+    if (file && *file)
+    {
+        ku_file_free_full (*file, true);
+        *file = NULL;
+    }
+}
+
+KU_VISIBLE void
+ku_file_free (KuFile *file)
+{
+    ku_file_free_full (file, false);
 }

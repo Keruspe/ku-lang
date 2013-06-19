@@ -27,6 +27,7 @@
 struct _KuFile
 {
     FILE      *file;
+    char      *filename;
     char       read;
     KuFileMode mode;
 };
