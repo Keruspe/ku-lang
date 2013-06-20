@@ -24,6 +24,8 @@
 #include "config.h"
 #endif
 
+#include <stdbool.h>
+
 typedef enum {
     /* Types */
     CHAR,
@@ -43,5 +45,8 @@ typedef enum {
     /* The token is not a reserved keyword */
     NONE
 } KuReservedKeyword;
+
+KuReservedKeyword ku_token_to_reserved_keyword (const char *token);
+bool              ku_token_is_reserved_keyword (const char *token);
 
 #endif /*__KU_REERVED_KEYWORDS_H__*/
