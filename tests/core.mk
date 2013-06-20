@@ -15,10 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with ku.  If not, see <http://www.gnu.org/licenses/>.
 
-TESTS +=                       \
-	tests/core/test-file   \
-	tests/core/test-stream \
-	tests/core/test-string \
+TESTS +=                                  \
+	tests/core/test-file              \
+	tests/core/test-reserved-keywords \
+	tests/core/test-stream            \
+	tests/core/test-string            \
 	$(NULL)
 
 tests_core_test_file_SOURCES = \
@@ -27,6 +28,14 @@ tests_core_test_file_SOURCES = \
 
 tests_core_test_file_LDADD =  \
 	$(libku_core_la_file) \
+	$(NULL)
+
+tests_core_test_reserved_keywords_SOURCES = \
+	tests/core/test-reserved-keywords.c \
+	$(NULL)
+
+tests_core_test_reserved_keywords_LDADD =  \
+	$(libku_core_la_file)              \
 	$(NULL)
 
 tests_core_test_stream_SOURCES = \
