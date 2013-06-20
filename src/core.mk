@@ -34,12 +34,13 @@ libku_core_private_headers =         \
 	src/core/ku-string-private.h \
 	$(NULL)
 
-src_core_libku_core_la_SOURCES =      \
-	$(libku_core_public_headers)  \
-	$(libku_core_private_headers) \
-	src/core/ku-file.c            \
-	src/core/ku-stream.c          \
-	src/core/ku-string.c          \
+src_core_libku_core_la_SOURCES =        \
+	$(libku_core_public_headers)    \
+	$(libku_core_private_headers)   \
+	src/core/ku-file.c              \
+	src/core/ku-reserved-keywords.c \
+	src/core/ku-stream.c            \
+	src/core/ku-string.c            \
 	$(NULL)
 
 libku_core_symbols_file = $(srcdir)/src/core/libku-core.sym
