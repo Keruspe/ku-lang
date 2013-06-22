@@ -8,6 +8,8 @@ test_ku_stream_null (void)
     KuStream *s = ku_stream_new_from_cstring (NULL);
     assert (ku_stream_is_empty (s));
     ku_stream_free (s);
+    assert (ku_stream_read_char (NULL) == '\0');
+    assert (ku_stream_is_empty (NULL));
 }
 
 static void
