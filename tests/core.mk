@@ -17,6 +17,7 @@
 
 TESTS +=                                  \
 	tests/core/test-file              \
+	tests/core/test-lexer             \
 	tests/core/test-reserved-keywords \
 	tests/core/test-stream            \
 	tests/core/test-string            \
@@ -28,6 +29,14 @@ tests_core_test_file_SOURCES = \
 
 tests_core_test_file_LDADD =  \
 	$(libku_core_la_file) \
+	$(NULL)
+
+tests_core_test_lexer_SOURCES = \
+	tests/core/test-lexer.c \
+	$(NULL)
+
+tests_core_test_lexer_LDADD = \
+	$(libku_core_la_file)  \
 	$(NULL)
 
 tests_core_test_reserved_keywords_SOURCES = \
