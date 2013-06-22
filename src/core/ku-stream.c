@@ -19,6 +19,8 @@
 
 #include "ku-stream-private.h"
 
+#include <stdio.h>
+
 static KuStream *
 ku_stream_new_full (KuFile   *file,
                     KuString *string)
@@ -29,6 +31,7 @@ ku_stream_new_full (KuFile   *file,
     KuStream *s = (KuStream *) malloc (sizeof (KuStream));
     s->file = file;
     s->string = string;
+    s->read = EOF;
     return s;
 }
 
@@ -59,6 +62,12 @@ ku_stream_is_empty (KuStream *stream)
 KU_VISIBLE char
 ku_stream_read_char (KuStream *stream)
 {
+    if (!stream)
+        return '\0';
+
+    if (stream->read != EOF)
+        return stream->read;
+
     return (stream->file)
         ? ku_file_read_char (stream->file)
         : ku_string_read_char (stream->string);
