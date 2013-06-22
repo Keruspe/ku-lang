@@ -80,14 +80,6 @@ ku_file_read_char (KuFile *file)
 }
 
 KU_VISIBLE void
-ku_file_skip (KuFile       *file,
-              unsigned int count)
-{
-    for (unsigned int i = 0; i < count; ++i)
-        ku_file_read_char (file);
-}
-
-KU_VISIBLE void
 ku_file_write (KuFile     *file,
                const char *content)
 {

@@ -1,4 +1,4 @@
-#include "ku-file.h"
+#include "ku-stream.h"
 
 #include <assert.h>
 #include <string.h>
@@ -48,9 +48,10 @@ test_ku_file_full (void)
     ku_file_write (rwf, "abc");
     ku_file_free (rwf);
     KuFile *rf = ku_file_new (filename, READ);
-    ku_file_skip (rf, 3);
+    KuStream *rs = ku_stream_new_from_file (rf);
+    ku_stream_skip (rs, 3);
     test_ku_file_read_full (rf);
-    ku_file_free (rf);
+    ku_stream_free (rs);
     KuFile *df = ku_file_new (filename, WRITE);
     ku_file_delete (&df);
     assert (df == NULL);

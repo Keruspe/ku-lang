@@ -42,6 +42,9 @@ KuStream *ku_stream_new_from_file    (KuFile     *file);
 bool ku_stream_is_empty  (KuStream *stream);
 char ku_stream_read_char (KuStream *stream);
 
+void ku_stream_skip (KuStream     *stream,
+                     unsigned int count);
+
 void ku_stream_free (KuStream *stream);
 
 #endif /*__KU_STREAM_H__*/

@@ -9,11 +9,11 @@ global:
     ku_stream_new_from_cstring;
     ku_stream_is_empty;
     ku_stream_read_char;
+    ku_stream_skip;
     ku_stream_free;
     ku_file_new;
     ku_file_is_empty;
     ku_file_read_char;
-    ku_file_skip;
     ku_file_write;
     ku_file_delete;
     ku_file_free;

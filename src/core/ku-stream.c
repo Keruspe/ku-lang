@@ -65,6 +65,14 @@ ku_stream_read_char (KuStream *stream)
 }
 
 KU_VISIBLE void
+ku_stream_skip (KuStream    *stream,
+                unsigned int count)
+{
+    for (unsigned int i = 0; i < count; ++i)
+        ku_stream_read_char (stream);
+}
+
+KU_VISIBLE void
 ku_stream_free (KuStream *stream)
 {
     if (stream)
