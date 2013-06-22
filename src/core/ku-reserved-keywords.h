@@ -17,8 +17,8 @@
  *      along with ku.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __KU_REERVED_KEYWORDS_H__
-#define __KU_REERVED_KEYWORDS_H__
+#ifndef __KU_RESERVED_KEYWORDS_H__
+#define __KU_RESERVED_KEYWORDS_H__
 
 #ifdef KU_COMPILATION
 #include "config.h"
@@ -46,7 +46,7 @@ typedef enum {
     NONE
 } KuReservedKeyword;
 
-KuReservedKeyword ku_token_to_reserved_keyword (const char *token);
-bool              ku_token_is_reserved_keyword (const char *token);
+KuReservedKeyword ku_token_cstring_to_reserved_keyword (const char *token);
+bool              ku_token_cstring_is_reserved_keyword (const char *token);
 
-#endif /*__KU_REERVED_KEYWORDS_H__*/
+#endif /*__KU_RESERVED_KEYWORDS_H__*/

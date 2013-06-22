@@ -17,8 +17,8 @@ global:
     ku_file_write;
     ku_file_delete;
     ku_file_free;
-    ku_token_to_reserved_keyword;
-    ku_token_is_reserved_keyword;
+    ku_token_cstring_to_reserved_keyword;
+    ku_token_cstring_is_reserved_keyword;
 local:
     *;
 };
