@@ -44,6 +44,7 @@ src_core_libku_core_la_SOURCES =        \
 	src/core/ku-separator.c         \
 	src/core/ku-stream.c            \
 	src/core/ku-string.c            \
+	src/core/ku-token.c             \
 	$(NULL)
 
 libku_core_symbols_file = $(srcdir)/src/core/libku-core.sym
