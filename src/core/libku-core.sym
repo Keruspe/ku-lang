@@ -21,6 +21,16 @@ global:
     ku_token_cstring_is_reserved_keyword;
     ku_token_cstring_to_separator;
     ku_token_cstring_is_separator;
+    ku_token_new_reserved_keyword;
+    ku_token_new_separator;
+    ku_token_new_string;
+    ku_token_is_reserved_keyword;
+    ku_token_is_separator;
+    ku_token_is_string;
+    ku_token_get_reserved_keyword_value;
+    ku_token_get_separator_value;
+    ku_token_get_string_value;
+    ku_token_free;
 local:
     *;
 };

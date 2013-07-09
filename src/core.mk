@@ -26,6 +26,7 @@ libku_core_public_headers =             \
 	src/core/ku-reserved-keywords.h \
 	src/core/ku-stream.h            \
 	src/core/ku-string.h            \
+	src/core/ku-token.h             \
 	$(NULL)
 
 libku_core_private_headers =         \
