@@ -26,6 +26,7 @@ ku_lexer_new (KuStream *stream)
 {
     KuLexer *lexer = (KuLexer *) malloc (sizeof (KuLexer));
     lexer->stream = stream;
+    lexer->buffer[0] = '\0';
     lexer->index = 0;
     return lexer;
 }
@@ -83,5 +84,8 @@ KU_VISIBLE void
 ku_lexer_free (KuLexer *lexer)
 {
     if (lexer)
+    {
+        ku_stream_free (lexer->stream);
         free (lexer);
+    }
 }
