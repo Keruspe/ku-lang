@@ -31,6 +31,9 @@ global:
     ku_token_get_separator_value;
     ku_token_get_string_value;
     ku_token_free;
+    ku_lexer_new;
+    ku_lexer_read_token;
+    ku_lexer_free;
 local:
     *;
 };
