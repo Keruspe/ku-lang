@@ -35,6 +35,8 @@ KuString *ku_string_new (const char *string);
 bool ku_string_is_empty  (KuString *string);
 char ku_string_read_char (KuString *string);
 
+bool ku_string_equals (KuString *s1, KuString *s2);
+
 void ku_string_free (KuString *string);
 
 #endif /*__KU_STRING_H__*/

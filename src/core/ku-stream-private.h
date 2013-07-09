@@ -26,7 +26,6 @@ struct _KuStream
 {
     KuString *string;
     KuFile   *file;
-    char      read;
 };
 
 #endif /*__KU_STREAM_PRIVATE_H__*/

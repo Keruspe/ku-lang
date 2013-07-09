@@ -2,19 +2,24 @@
 
 #include <assert.h>
 
-#define EXPECT(type, value)                                \
-    token = ku_lexer_read_token (l);                       \
-    assert (ku_token_is_##type (token));                   \
-    assert (ku_token_get_##type##_value (token) == value); \
+#define EQUALS(a, b) a == b
+
+#define EXPECT_FULL(type, value, cmp)                          \
+    token = ku_lexer_read_token (l);                           \
+    assert (ku_token_is_##type (token));                       \
+    assert (cmp (ku_token_get_##type##_value (token), value)); \
     ku_token_free (token)
+
+#define EXPECT(type, value) \
+    EXPECT_FULL (type, value, EQUALS)
 
 #define EXPECT_SEPARATOR(s) EXPECT (separator, s)
 
 #define EXPECT_KEYWORD(k)   EXPECT (reserved_keyword, k)
 
-#define EXPECT_STRING(s)     \
-    str = ku_string_new (s); \
-    EXPECT (string, str);    \
+#define EXPECT_STRING(s)                         \
+    str = ku_string_new (s);                     \
+    EXPECT_FULL (string, str, ku_string_equals); \
     ku_string_free (str);
 
 #define EXPECT_KEYWORD_AND_SPACE(k) \

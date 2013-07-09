@@ -48,6 +48,18 @@ ku_string_read_char (KuString *string)
     return string->string[string->pos++];
 }
 
+KU_VISIBLE bool
+ku_string_equals (KuString *s1, KuString *s2)
+{
+    if (s1 == s2)
+        return true;
+
+    if (!s1)
+        return false;
+
+    return !strcmp (s1->string, s2->string);
+}
+
 KU_VISIBLE void
 ku_string_free (KuString *string)
 {
