@@ -2,22 +2,24 @@
 
 #include <assert.h>
 
-#define EXPECT_SEPARATOR(s)                  \
-    token = ku_lexer_read_token (l);         \
-    assert (ku_token_is_separator (&token)); \
-    assert (ku_token_get_separator_value (&token) == s);
+#define EXPECT_SEPARATOR(s)                             \
+    token = ku_lexer_read_token (l);                    \
+    assert (ku_token_is_separator (token));             \
+    assert (ku_token_get_separator_value (token) == s); \
+    ku_token_free (token);
 
-#define EXPECT_KEYWORD(k)                                       \
-    token = ku_lexer_read_token (l);                            \
-    assert (ku_token_is_reserved_keyword (&token));             \
-    assert (ku_token_get_reserved_keyword_value (&token) == k); \
+#define EXPECT_KEYWORD(k)                                      \
+    token = ku_lexer_read_token (l);                           \
+    assert (ku_token_is_reserved_keyword (token));             \
+    assert (ku_token_get_reserved_keyword_value (token) == k); \
+    ku_token_free (token);                                     \
     EXPECT_SEPARATOR (SPACE);
 
 static void
 test_token_reserved_keywords (void)
 {
     KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("char int long unsigned float double if else elif do while for "));
-    KuToken token;
+    KuToken *token;
     EXPECT_KEYWORD (CHAR);
     EXPECT_KEYWORD (INT);
     EXPECT_KEYWORD (LONG);
@@ -36,8 +38,8 @@ test_token_reserved_keywords (void)
 static void
 test_token_separators (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+*/\'\"`"));
-    KuToken token;
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+*/'\"`"));
+    KuToken *token;
     EXPECT_SEPARATOR (SPACE);
     EXPECT_SEPARATOR (NEWLINE);
     EXPECT_SEPARATOR (TAB);
