@@ -33,6 +33,7 @@ libku_core_private_headers =         \
 	src/core/ku-file-private.h   \
 	src/core/ku-streaù-private.h \
 	src/core/ku-string-private.h \
+	src/core/ku-token-private.h  \
 	$(NULL)
 
 src_core_libku_core_la_SOURCES =        \
