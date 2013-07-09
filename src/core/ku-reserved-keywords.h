@@ -43,7 +43,7 @@ typedef enum {
     WHILE,
     FOR,
     /* The token is not a reserved keyword */
-    NONE
+    K_NONE
 } KuReservedKeyword;
 
 KuReservedKeyword ku_token_cstring_to_reserved_keyword (const char *token);

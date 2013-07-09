@@ -21,7 +21,7 @@ test_ku_reserved_keywords_full (void)
     TEST_KEYWORD ("do", DO);
     TEST_KEYWORD ("while", WHILE);
     TEST_KEYWORD ("for", FOR);
-    TEST_KEYWORD ("abc", NONE);
+    TEST_KEYWORD ("abc", K_NONE);
 }
 
 static void

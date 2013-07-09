@@ -29,7 +29,7 @@ test_ku_separators_full (void)
     TEST_SEPARATOR ("'",   SQUOTE);
     TEST_SEPARATOR ("\"",  DQUOTE);
     TEST_SEPARATOR ("`",   BQUOTE);
-    TEST_SEPARATOR ("abc", NONE);
+    TEST_SEPARATOR ("abc", S_NONE);
 }
 
 static void

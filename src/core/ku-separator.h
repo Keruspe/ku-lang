@@ -48,7 +48,7 @@ typedef enum {
     DQUOTE,
     BQUOTE,
     /* The token is not a reserved keyword */
-    NONE
+    S_NONE
 } KuSeparator;
 
 KuSeparator ku_token_cstring_to_separator (const char *token);

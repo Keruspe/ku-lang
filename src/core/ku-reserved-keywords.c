@@ -21,7 +21,7 @@
 
 #include <string.h>
 
-static const char *tokens[NONE] = {
+static const char *tokens[K_NONE] = {
     /* Types */
     [CHAR]     = "char",
     [INT]      = "int",
@@ -44,18 +44,18 @@ ku_token_cstring_to_reserved_keyword (const char *token)
 {
     if (token)
     {
-        for (KuReservedKeyword k = CHAR; k < NONE; ++k)
+        for (KuReservedKeyword k = CHAR; k < K_NONE; ++k)
         {
             if (!strcmp (token, tokens[k]))
                 return k;
         }
     }
 
-    return NONE;
+    return K_NONE;
 }
 
 KU_VISIBLE bool
 ku_token_cstring_is_reserved_keyword (const char *token)
 {
-    return (ku_token_cstring_to_reserved_keyword (token) != NONE);
+    return (ku_token_cstring_to_reserved_keyword (token) != K_NONE);
 }

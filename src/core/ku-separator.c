@@ -21,7 +21,7 @@
 
 #include <string.h>
 
-static const char *tokens[NONE] = {
+static const char *tokens[S_NONE] = {
     [SPACE] =         " ",
     [NEWLINE] =       "\n",
     [TAB] =           "\t",
@@ -49,18 +49,18 @@ ku_token_cstring_to_separator (const char *token)
 {
     if (token)
     {
-        for (KuSeparator s = SPACE; s < NONE; ++s)
+        for (KuSeparator s = SPACE; s < S_NONE; ++s)
         {
             if (!strcmp (token, tokens[s]))
                 return s;
         }
     }
 
-    return NONE;
+    return S_NONE;
 }
 
 KU_VISIBLE bool
 ku_token_cstring_is_separator (const char *token)
 {
-    return (ku_token_cstring_to_separator (token) != NONE);
+    return (ku_token_cstring_to_separator (token) != S_NONE);
 }
