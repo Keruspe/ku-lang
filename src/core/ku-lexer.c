@@ -19,6 +19,8 @@
 
 #include "ku-lexer-private.h"
 
+#include <assert.h>
+
 KU_VISIBLE KuLexer *
 ku_lexer_new (KuStream *stream)
 {
@@ -34,25 +36,30 @@ ku_lexer_read_token (KuLexer *lexer)
     if (!lexer)
         return NULL;
 
-    if (ku_token_cstring_is_separator (lexer->buffer))
-    {
-        KuToken *token = ku_token_new_separator (ku_token_cstring_to_separator (lexer->buffer));
-        lexer->buffer[0] = '\0';
-        lexer->index = 0;
-        return token;
-    }
-
+    bool buf_eq_sep;
     char sep[2] = "";
-    do {
-        sep[0] = ku_stream_read_char (lexer->stream);
-        lexer->buffer[lexer->index++] = sep[0];
-    } while (!ku_token_cstring_is_separator (sep));
-    if (lexer->index > 1)
-        lexer->buffer[lexer->index - 1] = '\0';
+
+    if (!lexer->buffer[0])
+    {
+        do {
+            sep[0] = ku_stream_read_char (lexer->stream);
+            lexer->buffer[lexer->index++] = sep[0];
+        } while (!ku_token_cstring_is_separator (sep));
+
+        size_t sep_len = strlen (sep);
+        buf_eq_sep = !memcmp (lexer->buffer, sep, sep_len);
+        if (buf_eq_sep)
+            lexer->buffer[lexer->index] = '\0';
+        else
+            lexer->buffer[lexer->index - strlen (sep)] = '\0';
+    }
+    else
+        buf_eq_sep = true;
 
     KuToken *token;
-    if (ku_token_cstring_is_separator (lexer->buffer))
+    if (buf_eq_sep)
     {
+        assert (ku_token_cstring_is_separator (lexer->buffer));
         token = ku_token_new_separator (ku_token_cstring_to_separator (lexer->buffer));
         lexer->buffer[0] = '\0';
     }
@@ -63,6 +70,7 @@ ku_lexer_read_token (KuLexer *lexer)
     }
     else
     {
+        assert (!ku_token_cstring_is_separator (lexer->buffer));
         token = ku_token_new_string (ku_string_new (lexer->buffer));
         strcpy (lexer->buffer, sep);
     }
