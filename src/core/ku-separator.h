@@ -42,11 +42,14 @@ typedef enum {
     COMMA,
     MINUS,
     PLUS,
-    TIMES,
     DIVIDE,
+    TIMES,
+    STAR = TIMES,
     SQUOTE,
     DQUOTE,
     BQUOTE,
+    EQUALS,
+    ARROW,
     /* The token is not a reserved keyword */
     S_NONE
 } KuSeparator;

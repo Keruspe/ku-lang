@@ -24,11 +24,14 @@ test_ku_separators_full (void)
     TEST_SEPARATOR (",",   COMMA);
     TEST_SEPARATOR ("-",   MINUS);
     TEST_SEPARATOR ("+",   PLUS);
-    TEST_SEPARATOR ("*",   TIMES);
     TEST_SEPARATOR ("/",   DIVIDE);
+    TEST_SEPARATOR ("*",   TIMES);
+    TEST_SEPARATOR ("*",   STAR);
     TEST_SEPARATOR ("'",   SQUOTE);
     TEST_SEPARATOR ("\"",  DQUOTE);
     TEST_SEPARATOR ("`",   BQUOTE);
+    TEST_SEPARATOR ("=",   EQUALS);
+    TEST_SEPARATOR ("->",  ARROW);
     TEST_SEPARATOR ("abc", S_NONE);
 }
 

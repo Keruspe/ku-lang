@@ -37,11 +37,13 @@ static const char *tokens[S_NONE] = {
     [COMMA] =         ",",
     [MINUS] =         "-",
     [PLUS] =          "+",
-    [TIMES] =         "*",
     [DIVIDE] =        "/",
+    [TIMES] =         "*",
     [SQUOTE] =        "'",
     [DQUOTE] =        "\"",
-    [BQUOTE] =        "`"
+    [BQUOTE] =        "`",
+    [EQUALS] =        "=",
+    [ARROW] =         "->",
 };
 
 KU_VISIBLE KuSeparator

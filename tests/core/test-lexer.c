@@ -43,7 +43,7 @@ test_token_reserved_keywords (void)
 static void
 test_token_separators (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+*/'\"`"));
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+/*'\"`=->"));
     KuToken *token;
     EXPECT_SEPARATOR (SPACE);
     EXPECT_SEPARATOR (NEWLINE);
@@ -60,11 +60,13 @@ test_token_separators (void)
     EXPECT_SEPARATOR (COMMA);
     EXPECT_SEPARATOR (MINUS);
     EXPECT_SEPARATOR (PLUS);
-    EXPECT_SEPARATOR (TIMES);
     EXPECT_SEPARATOR (DIVIDE);
+    EXPECT_SEPARATOR (TIMES);
     EXPECT_SEPARATOR (SQUOTE);
     EXPECT_SEPARATOR (DQUOTE);
     EXPECT_SEPARATOR (BQUOTE);
+    EXPECT_SEPARATOR (EQUALS);
+    EXPECT_SEPARATOR (ARROW);
     ku_lexer_free (l);
 }
 
