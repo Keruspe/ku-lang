@@ -42,6 +42,7 @@ src_core_libku_core_la_SOURCES =        \
 	$(libku_core_public_headers)    \
 	$(libku_core_private_headers)   \
 	src/core/ku-file.c              \
+	src/core/ku-lexer.c             \
 	src/core/ku-reserved-keywords.c \
 	src/core/ku-separator.c         \
 	src/core/ku-stream.c            \
