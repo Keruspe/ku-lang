@@ -32,6 +32,7 @@ libku_core_public_headers =             \
 
 libku_core_private_headers =         \
 	src/core/ku-file-private.h   \
+	src/core/ku-lexer-private.h  \
 	src/core/ku-streaù-private.h \
 	src/core/ku-string-private.h \
 	src/core/ku-token-private.h  \
