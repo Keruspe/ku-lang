@@ -1,0 +1,11 @@
+bool test = TRUE;
+Foo *f = NULL;
+if (test)
+    f->bar;
+elif (f->baz)
+    f++;
+else
+{
+    f--;
+}
+return 0;

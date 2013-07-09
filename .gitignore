@@ -1,4 +1,4 @@
 Makefile
 test-*
 !test-*.c
-!tests/core/data
+!tests/data/*
