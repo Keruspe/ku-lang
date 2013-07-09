@@ -29,10 +29,17 @@ static const char *tokens[K_NONE] = {
     [UNSIGNED] = "unsigned",
     [FLOAT]    = "float",
     [DOUBLE]   = "double",
+    [BOOL]     = "bool",
+    /* Values */
+    [PNULL]    = "NULL",
+    [BTRUE]    = "TRUE",
+    [BFALSE]   = "FALSE",
     /* Branches */
     [IF]       = "if",
     [ELSE]     = "else",
     [ELIF]     = "elif",
+    /* Builtins */
+    [RETURN]   = "return",
     /* Loops */
     [DO]       = "do",
     [WHILE]    = "while",

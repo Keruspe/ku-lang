@@ -34,6 +34,11 @@ typedef enum {
     UNSIGNED,
     FLOAT,
     DOUBLE,
+    BOOL,
+    /* Values */
+    PNULL,
+    BTRUE,
+    BFALSE,
     /* Branches */
     IF,
     ELSE,
@@ -42,6 +47,8 @@ typedef enum {
     DO,
     WHILE,
     FOR,
+    /* Builtins */
+    RETURN,
     /* The token is not a reserved keyword */
     K_NONE
 } KuReservedKeyword;

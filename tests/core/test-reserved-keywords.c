@@ -15,9 +15,14 @@ test_ku_reserved_keywords_full (void)
     TEST_KEYWORD ("unsigned", UNSIGNED);
     TEST_KEYWORD ("float", FLOAT);
     TEST_KEYWORD ("double", DOUBLE);
+    TEST_KEYWORD ("bool", BOOL);
+    TEST_KEYWORD ("NULL", PNULL);
+    TEST_KEYWORD ("TRUE", BTRUE);
+    TEST_KEYWORD ("FALSE", BFALSE);
     TEST_KEYWORD ("if", IF);
     TEST_KEYWORD ("else", ELSE);
     TEST_KEYWORD ("elif", ELIF);
+    TEST_KEYWORD ("return", RETURN);
     TEST_KEYWORD ("do", DO);
     TEST_KEYWORD ("while", WHILE);
     TEST_KEYWORD ("for", FOR);

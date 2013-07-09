@@ -18,7 +18,7 @@
 static void
 test_token_reserved_keywords (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("char int long unsigned float double if else elif do while for "));
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("char int long unsigned float double bool NULL TRUE FALSE if else elif return do while for "));
     KuToken *token;
     EXPECT_KEYWORD (CHAR);
     EXPECT_KEYWORD (INT);
@@ -26,9 +26,14 @@ test_token_reserved_keywords (void)
     EXPECT_KEYWORD (UNSIGNED);
     EXPECT_KEYWORD (FLOAT);
     EXPECT_KEYWORD (DOUBLE);
+    EXPECT_KEYWORD (BOOL);
+    EXPECT_KEYWORD (PNULL);
+    EXPECT_KEYWORD (BTRUE);
+    EXPECT_KEYWORD (BFALSE);
     EXPECT_KEYWORD (IF);
     EXPECT_KEYWORD (ELSE);
     EXPECT_KEYWORD (ELIF);
+    EXPECT_KEYWORD (RETURN);
     EXPECT_KEYWORD (DO);
     EXPECT_KEYWORD (WHILE);
     EXPECT_KEYWORD (FOR);
