@@ -17,8 +17,23 @@ global:
     ku_file_write;
     ku_file_delete;
     ku_file_free;
-    ku_token_to_reserved_keyword;
+    ku_token_cstring_to_reserved_keyword;
+    ku_token_cstring_is_reserved_keyword;
+    ku_token_cstring_to_separator;
+    ku_token_cstring_is_separator;
+    ku_token_new_reserved_keyword;
+    ku_token_new_separator;
+    ku_token_new_string;
     ku_token_is_reserved_keyword;
+    ku_token_is_separator;
+    ku_token_is_string;
+    ku_token_get_reserved_keyword_value;
+    ku_token_get_separator_value;
+    ku_token_get_string_value;
+    ku_token_free;
+    ku_lexer_new;
+    ku_lexer_read_token;
+    ku_lexer_free;
 local:
     *;
 };

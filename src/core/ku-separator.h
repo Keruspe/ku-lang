@@ -17,8 +17,8 @@
  *      along with ku.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __KU_RESERVED_KEYWORDS_H__
-#define __KU_RESERVED_KEYWORDS_H__
+#ifndef __KU_SEPARATOR_H__
+#define __KU_SEPARATOR_H__
 
 #ifdef KU_COMPILATION
 #include "config.h"
@@ -27,26 +27,31 @@
 #include <stdbool.h>
 
 typedef enum {
-    /* Types */
-    CHAR,
-    INT,
-    LONG,
-    UNSIGNED,
-    FLOAT,
-    DOUBLE,
-    /* Branches */
-    IF,
-    ELSE,
-    ELIF,
-    /* Loops */
-    DO,
-    WHILE,
-    FOR,
+    SPACE,
+    NEWLINE,
+    TAB,
+    COLON,
+    SEMI_COLON,
+    LEFT_PAREN,
+    RIGHT_PAREN,
+    LEFT_CURLY,
+    RIGHT_CURLY,
+    LEFT_BRACKET,
+    RIGHT_BRACKET,
+    DOT,
+    COMMA,
+    MINUS,
+    PLUS,
+    TIMES,
+    DIVIDE,
+    SQUOTE,
+    DQUOTE,
+    BQUOTE,
     /* The token is not a reserved keyword */
-    K_NONE
-} KuReservedKeyword;
+    S_NONE
+} KuSeparator;
 
-KuReservedKeyword ku_token_cstring_to_reserved_keyword (const char *token);
-bool              ku_token_cstring_is_reserved_keyword (const char *token);
+KuSeparator ku_token_cstring_to_separator (const char *token);
+bool        ku_token_cstring_is_separator (const char *token);
 
-#endif /*__KU_RESERVED_KEYWORDS_H__*/
+#endif /*__KU_SEPARATOR_H__*/

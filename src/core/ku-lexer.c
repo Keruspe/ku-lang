@@ -1,0 +1,79 @@
+/*
+ *      This file is part of ku.
+ *
+ *      Copyright 2013 Marc-Antoine Perennou <Marc-Antoine@Perennou.com>
+ *
+ *      ku is free software: you can redistribute it and/or modify
+ *      it under the terms of the GNU General Public License as published by
+ *      the Free Software Foundation, either version 3 of the License, or
+ *      (at your option) any later version.
+ *
+ *      ku is distributed in the hope that it will be useful,
+ *      but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *      GNU General Public License for more details.
+ *
+ *      You should have received a copy of the GNU General Public License
+ *      along with ku.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#include "ku-lexer-private.h"
+
+KU_VISIBLE KuLexer *
+ku_lexer_new (KuStream *stream)
+{
+    KuLexer *lexer = (KuLexer *) malloc (sizeof (KuLexer));
+    lexer->stream = stream;
+    lexer->index = 0;
+    return lexer;
+}
+
+KU_VISIBLE KuToken *
+ku_lexer_read_token (KuLexer *lexer)
+{
+    if (!lexer)
+        return NULL;
+
+    if (ku_token_cstring_is_separator (lexer->buffer))
+    {
+        KuToken *token = ku_token_new_separator (ku_token_cstring_to_separator (lexer->buffer));
+        lexer->buffer[0] = '\0';
+        lexer->index = 0;
+        return token;
+    }
+
+    char sep[2] = "";
+    do {
+        sep[0] = ku_stream_read_char (lexer->stream);
+        lexer->buffer[lexer->index++] = sep[0];
+    } while (!ku_token_cstring_is_separator (sep));
+    if (lexer->index > 1)
+        lexer->buffer[lexer->index - 1] = '\0';
+
+    KuToken *token;
+    if (ku_token_cstring_is_separator (lexer->buffer))
+    {
+        token = ku_token_new_separator (ku_token_cstring_to_separator (lexer->buffer));
+        lexer->buffer[0] = '\0';
+    }
+    else if (ku_token_cstring_is_reserved_keyword (lexer->buffer))
+    {
+        token = ku_token_new_reserved_keyword (ku_token_cstring_to_reserved_keyword (lexer->buffer));
+        strcpy (lexer->buffer, sep);
+    }
+    else
+    {
+        token = ku_token_new_string (ku_string_new (lexer->buffer));
+        strcpy (lexer->buffer, sep);
+    }
+
+    lexer->index = 0;
+    return token;
+}
+
+KU_VISIBLE void
+ku_lexer_free (KuLexer *lexer)
+{
+    if (lexer)
+        free (lexer);
+}

@@ -17,36 +17,18 @@
  *      along with ku.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __KU_RESERVED_KEYWORDS_H__
-#define __KU_RESERVED_KEYWORDS_H__
+#ifndef __KU_LEXER_H__
+#define __KU_LEXER_H__
 
-#ifdef KU_COMPILATION
-#include "config.h"
-#endif
+#include "ku-stream.h"
+#include "ku-token.h"
 
-#include <stdbool.h>
+typedef struct _KuLexer KuLexer;
 
-typedef enum {
-    /* Types */
-    CHAR,
-    INT,
-    LONG,
-    UNSIGNED,
-    FLOAT,
-    DOUBLE,
-    /* Branches */
-    IF,
-    ELSE,
-    ELIF,
-    /* Loops */
-    DO,
-    WHILE,
-    FOR,
-    /* The token is not a reserved keyword */
-    K_NONE
-} KuReservedKeyword;
+KuLexer *ku_lexer_new (KuStream *stream);
 
-KuReservedKeyword ku_token_cstring_to_reserved_keyword (const char *token);
-bool              ku_token_cstring_is_reserved_keyword (const char *token);
+KuToken *ku_lexer_read_token (KuLexer *lexer);
 
-#endif /*__KU_RESERVED_KEYWORDS_H__*/
+void ku_lexer_free (KuLexer *lexer);
+
+#endif /*__KU_LEXER_H__*/

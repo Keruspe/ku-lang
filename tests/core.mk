@@ -17,7 +17,9 @@
 
 TESTS +=                                  \
 	tests/core/test-file              \
+	tests/core/test-lexer             \
 	tests/core/test-reserved-keywords \
+	tests/core/test-separator         \
 	tests/core/test-stream            \
 	tests/core/test-string            \
 	$(NULL)
@@ -30,12 +32,28 @@ tests_core_test_file_LDADD =  \
 	$(libku_core_la_file) \
 	$(NULL)
 
+tests_core_test_lexer_SOURCES = \
+	tests/core/test-lexer.c \
+	$(NULL)
+
+tests_core_test_lexer_LDADD = \
+	$(libku_core_la_file)  \
+	$(NULL)
+
 tests_core_test_reserved_keywords_SOURCES = \
 	tests/core/test-reserved-keywords.c \
 	$(NULL)
 
 tests_core_test_reserved_keywords_LDADD =  \
 	$(libku_core_la_file)              \
+	$(NULL)
+
+tests_core_test_separator_SOURCES = \
+	tests/core/test-separator.c \
+	$(NULL)
+
+tests_core_test_separator_LDADD = \
+	$(libku_core_la_file)  \
 	$(NULL)
 
 tests_core_test_stream_SOURCES = \

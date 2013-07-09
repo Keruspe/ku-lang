@@ -17,36 +17,29 @@
  *      along with ku.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __KU_RESERVED_KEYWORDS_H__
-#define __KU_RESERVED_KEYWORDS_H__
+#ifndef __KU_TOKEN_H__
+#define __KU_TOKEN_H__
 
-#ifdef KU_COMPILATION
-#include "config.h"
-#endif
+#include "ku-reserved-keywords.h"
+#include "ku-separator.h"
+#include "ku-string.h"
 
 #include <stdbool.h>
 
-typedef enum {
-    /* Types */
-    CHAR,
-    INT,
-    LONG,
-    UNSIGNED,
-    FLOAT,
-    DOUBLE,
-    /* Branches */
-    IF,
-    ELSE,
-    ELIF,
-    /* Loops */
-    DO,
-    WHILE,
-    FOR,
-    /* The token is not a reserved keyword */
-    K_NONE
-} KuReservedKeyword;
+typedef struct _KuToken KuToken;
 
-KuReservedKeyword ku_token_cstring_to_reserved_keyword (const char *token);
-bool              ku_token_cstring_is_reserved_keyword (const char *token);
+KuToken *ku_token_new_reserved_keyword (KuReservedKeyword keyword);
+KuToken *ku_token_new_separator        (KuSeparator       separator);
+KuToken *ku_token_new_string           (KuString         *string);
 
-#endif /*__KU_RESERVED_KEYWORDS_H__*/
+bool ku_token_is_reserved_keyword (KuToken *token);
+bool ku_token_is_separator        (KuToken *token);
+bool ku_token_is_string           (KuToken *token);
+
+KuReservedKeyword ku_token_get_reserved_keyword_value (KuToken *token);
+KuSeparator       ku_token_get_separator_value        (KuToken *token);
+KuString         *ku_token_get_string_value           (KuToken *token);
+
+void ku_token_free (KuToken *token);
+
+#endif /*__KU_TOKEN_H__*/
