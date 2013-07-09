@@ -2,41 +2,47 @@
 
 #include <assert.h>
 
-#define EXPECT_SEPARATOR(s)                             \
-    token = ku_lexer_read_token (l);                    \
-    assert (ku_token_is_separator (token));             \
-    assert (ku_token_get_separator_value (token) == s); \
-    ku_token_free (token);
+#define EXPECT(type, value)                                \
+    token = ku_lexer_read_token (l);                       \
+    assert (ku_token_is_##type (token));                   \
+    assert (ku_token_get_##type##_value (token) == value); \
+    ku_token_free (token)
 
-#define EXPECT_KEYWORD(k)                                      \
-    token = ku_lexer_read_token (l);                           \
-    assert (ku_token_is_reserved_keyword (token));             \
-    assert (ku_token_get_reserved_keyword_value (token) == k); \
-    ku_token_free (token);                                     \
-    EXPECT_SEPARATOR (SPACE);
+#define EXPECT_SEPARATOR(s) EXPECT (separator, s)
+
+#define EXPECT_KEYWORD(k)   EXPECT (reserved_keyword, k)
+
+#define EXPECT_STRING(s)     \
+    str = ku_string_new (s); \
+    EXPECT (string, str);    \
+    ku_string_free (str);
+
+#define EXPECT_KEYWORD_AND_SPACE(k) \
+    EXPECT_KEYWORD (k);             \
+    EXPECT_SEPARATOR (SPACE)
 
 static void
 test_token_reserved_keywords (void)
 {
     KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("char int long unsigned float double bool NULL TRUE FALSE if else elif return do while for "));
     KuToken *token;
-    EXPECT_KEYWORD (CHAR);
-    EXPECT_KEYWORD (INT);
-    EXPECT_KEYWORD (LONG);
-    EXPECT_KEYWORD (UNSIGNED);
-    EXPECT_KEYWORD (FLOAT);
-    EXPECT_KEYWORD (DOUBLE);
-    EXPECT_KEYWORD (BOOL);
-    EXPECT_KEYWORD (PNULL);
-    EXPECT_KEYWORD (BTRUE);
-    EXPECT_KEYWORD (BFALSE);
-    EXPECT_KEYWORD (IF);
-    EXPECT_KEYWORD (ELSE);
-    EXPECT_KEYWORD (ELIF);
-    EXPECT_KEYWORD (RETURN);
-    EXPECT_KEYWORD (DO);
-    EXPECT_KEYWORD (WHILE);
-    EXPECT_KEYWORD (FOR);
+    EXPECT_KEYWORD_AND_SPACE (CHAR);
+    EXPECT_KEYWORD_AND_SPACE (INT);
+    EXPECT_KEYWORD_AND_SPACE (LONG);
+    EXPECT_KEYWORD_AND_SPACE (UNSIGNED);
+    EXPECT_KEYWORD_AND_SPACE (FLOAT);
+    EXPECT_KEYWORD_AND_SPACE (DOUBLE);
+    EXPECT_KEYWORD_AND_SPACE (BOOL);
+    EXPECT_KEYWORD_AND_SPACE (PNULL);
+    EXPECT_KEYWORD_AND_SPACE (BTRUE);
+    EXPECT_KEYWORD_AND_SPACE (BFALSE);
+    EXPECT_KEYWORD_AND_SPACE (IF);
+    EXPECT_KEYWORD_AND_SPACE (ELSE);
+    EXPECT_KEYWORD_AND_SPACE (ELIF);
+    EXPECT_KEYWORD_AND_SPACE (RETURN);
+    EXPECT_KEYWORD_AND_SPACE (DO);
+    EXPECT_KEYWORD_AND_SPACE (WHILE);
+    EXPECT_KEYWORD_AND_SPACE (FOR);
     ku_lexer_free (l);
 }
 
@@ -75,6 +81,7 @@ test_real_world_one (void)
 {
     KuLexer *l = ku_lexer_new (ku_stream_new_from_file (ku_file_new ("tests/data/test-one.ku", READ)));
     KuToken *token;
+    KuString *str;
 
     EXPECT_KEYWORD   (BOOL);
     EXPECT_SEPARATOR (SPACE);
@@ -154,7 +161,8 @@ test_real_world_one (void)
 
     EXPECT_KEYWORD   (RETURN);
     EXPECT_SEPARATOR (SPACE);
-    EXPECT_INT       (0);
+    EXPECT_STRING    ("0");
+//    EXPECT_INT       (0);
     EXPECT_SEPARATOR (SEMI_COLON);
     EXPECT_SEPARATOR (NEWLINE);
 
