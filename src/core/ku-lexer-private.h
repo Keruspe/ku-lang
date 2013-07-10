@@ -27,6 +27,7 @@ struct _KuLexer
     KuStream    *stream;
     char         buffer[256];
     unsigned int index;
+    char         backup;
 };
 
 #endif /*__KU_LEXER_PRIVATE_H__*/

@@ -29,6 +29,7 @@ ku_lexer_new (KuStream *stream)
     lexer->stream = stream;
     lexer->buffer[0] = '\0';
     lexer->index = 0;
+    lexer->backup = '\0';
     return lexer;
 }
 
@@ -39,9 +40,19 @@ ku_lexer_read_token (KuLexer *lexer)
         return NULL;
 
     bool buf_eq_sep;
-    char sep[2] = "";
+    char sep[3] = "";
 
-    if (!lexer->buffer[0])
+    if (lexer->backup)
+    {
+        if (lexer->buffer[0])
+            sep[0] = lexer->backup;
+        else
+            lexer->buffer[0] = lexer->backup;
+        buf_eq_sep = false;
+        lexer->backup = '\0';
+    }
+    else if (!ku_token_cstring_is_separator (lexer->buffer) ||
+             ku_token_cstring_may_be_unfinished_separator (lexer->buffer))
     {
         do {
             assert (lexer->index <= 254);
@@ -49,6 +60,31 @@ ku_lexer_read_token (KuLexer *lexer)
             if (sep[0] == '\0')
                 break;
             lexer->buffer[lexer->index++] = sep[0];
+
+            sep[1] = '\0';
+            if (ku_token_cstring_may_be_unfinished_separator (sep))
+            {
+                sep[1] = ku_stream_read_char (lexer->stream);
+                if (!sep[1])
+                    break;
+                else if (ku_token_cstring_is_separator (sep))
+                {
+                    assert (lexer->index <= 254);
+                    lexer->buffer[lexer->index++] = sep[1];
+                    break;
+                }
+                else
+                {
+                    lexer->backup = sep[1];
+                    sep[1] = '\0';
+                    break;
+                }
+            }
+            if (ku_token_cstring_is_separator (lexer->buffer))
+            {
+                buf_eq_sep = true;
+                break;
+            }
         } while (!ku_token_cstring_is_separator (sep));
 
         size_t sep_len = strlen (sep);
@@ -75,14 +111,18 @@ ku_lexer_read_token (KuLexer *lexer)
         token = ku_token_new_reserved_keyword (ku_token_cstring_to_reserved_keyword (lexer->buffer));
         strcpy (lexer->buffer, sep);
     }
+    else if (ku_token_cstring_is_separator (lexer->buffer))
+    {
+        token = ku_token_new_separator (ku_token_cstring_to_separator (lexer->buffer));
+        strcpy (lexer->buffer, sep);
+    }
     else
     {
-        assert (!ku_token_cstring_is_separator (lexer->buffer));
         token = ku_token_new_string (ku_string_new (lexer->buffer));
         strcpy (lexer->buffer, sep);
     }
 
-    lexer->index = 0;
+    lexer->index = strlen (lexer->buffer);
     return token;
 }
 
