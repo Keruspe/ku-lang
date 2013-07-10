@@ -93,7 +93,7 @@ test_token_minus_minus_arrow (void)
 static void
 test_real_world_one (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_file (ku_file_new ("tests/data/test-one.ku", READ)));
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_file (ku_file_new (SRC_DIR "/tests/data/test-one.ku", READ)));
     KuToken *token;
 
     EXPECT_KEYWORD   (BOOL);

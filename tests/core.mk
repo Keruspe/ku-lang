@@ -71,3 +71,8 @@ tests_core_test_string_SOURCES = \
 tests_core_test_string_LDADD = \
 	$(libku_core_la_file)  \
 	$(NULL)
+
+EXTRA_DIST+=                     \
+	tests/data/test-file.txt \
+	tests/data/test-one.ku   \
+	$(NULL)

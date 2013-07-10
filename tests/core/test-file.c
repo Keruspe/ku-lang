@@ -29,7 +29,7 @@ test_ku_file_read_full (KuFile *f)
 static void
 test_ku_file_read (void)
 {
-    KuFile *f = ku_file_new ("tests/data/test-file.txt", READ);
+    KuFile *f = ku_file_new (SRC_DIR "/tests/data/test-file.txt", READ);
     test_ku_file_read_full (f);
     ku_file_free (f);
 }

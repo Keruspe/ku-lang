@@ -22,9 +22,10 @@ AM_MAKEFLAGS = --no-print-directory
 AM_DISTCHECK_CONFIGURE_FLAGS = \
 	$(NULL)
 
-AM_CPPFLAGS =                \
-	-I$(srcdir)/src/core \
-	-DKU_COMPILATION     \
+AM_CPPFLAGS =                   \
+	-I$(srcdir)/src/core    \
+	-DKU_COMPILATION        \
+	-DSRC_DIR=\"$(srcdir)\" \
 	$(NULL)
 
 EXTRA_DIST =       \

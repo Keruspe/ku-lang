@@ -43,7 +43,7 @@ test_ku_stream_cstring_full (void)
 static void
 test_ku_stream_file_full (void)
 {
-    _test_ku_stream_full (ku_stream_new_from_file (ku_file_new ("tests/data/test-file.txt", READ)));
+    _test_ku_stream_full (ku_stream_new_from_file (ku_file_new (SRC_DIR "/tests/data/test-file.txt", READ)));
 }
 
 int

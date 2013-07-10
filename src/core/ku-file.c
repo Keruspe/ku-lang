@@ -32,7 +32,7 @@ ku_file_mode_to_mode (KuFileMode mode)
         case WRITE:
             return "w+";
         default:
-            return "r+";
+            return "r";
     }
 }
 
