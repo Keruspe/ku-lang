@@ -18,33 +18,45 @@
  */
 
 #include "ku-separator.h"
+#include "ku-string.h"
 
 #include <string.h>
 
-static const char *tokens[S_NONE] = {
-    [SPACE] =         " ",
-    [NEWLINE] =       "\n",
-    [TAB] =           "\t",
-    [COLON] =         ":",
-    [SEMI_COLON] =    ";",
-    [LEFT_PAREN] =    "(",
-    [RIGHT_PAREN] =   ")",
-    [LEFT_CURLY] =    "{",
-    [RIGHT_CURLY] =   "}",
-    [LEFT_BRACKET] =  "[",
-    [RIGHT_BRACKET] = "]",
-    [DOT] =           ".",
-    [COMMA] =         ",",
-    [MINUS] =         "-",
-    [PLUS] =          "+",
-    [DIVIDE] =        "/",
-    [TIMES] =         "*",
-    [SQUOTE] =        "'",
-    [DQUOTE] =        "\"",
-    [BQUOTE] =        "`",
-    [EQUALS] =        "=",
-    [ARROW] =         "->",
-};
+static KuString *tokens[S_NONE];
+
+static __attribute__((constructor)) void
+tokens_setup (void)
+{
+    tokens[SPACE] =         ku_string_new (" ");
+    tokens[NEWLINE] =       ku_string_new ("\n");
+    tokens[TAB] =           ku_string_new ("\t");
+    tokens[COLON] =         ku_string_new (":");
+    tokens[SEMI_COLON] =    ku_string_new (";");
+    tokens[LEFT_PAREN] =    ku_string_new ("(");
+    tokens[RIGHT_PAREN] =   ku_string_new (")");
+    tokens[LEFT_CURLY] =    ku_string_new ("{");
+    tokens[RIGHT_CURLY] =   ku_string_new ("}");
+    tokens[LEFT_BRACKET] =  ku_string_new ("[");
+    tokens[RIGHT_BRACKET] = ku_string_new ("]");
+    tokens[DOT] =           ku_string_new (".");
+    tokens[COMMA] =         ku_string_new (",");
+    tokens[MINUS] =         ku_string_new ("-");
+    tokens[PLUS] =          ku_string_new ("+");
+    tokens[DIVIDE] =        ku_string_new ("/");
+    tokens[TIMES] =         ku_string_new ("*");
+    tokens[SQUOTE] =        ku_string_new ("'");
+    tokens[DQUOTE] =        ku_string_new ("\"");
+    tokens[BQUOTE] =        ku_string_new ("`");
+    tokens[EQUALS] =        ku_string_new ("=");
+    tokens[ARROW] =         ku_string_new ("->");
+}
+
+static __attribute__((destructor)) void
+tokens_cleanup (void)
+{
+    for (KuSeparator s = SPACE; s < S_NONE; ++s)
+        ku_string_free (tokens[s]);
+}
 
 KU_VISIBLE KuSeparator
 ku_token_cstring_to_separator (const char *token)
@@ -53,12 +65,33 @@ ku_token_cstring_to_separator (const char *token)
     {
         for (KuSeparator s = SPACE; s < S_NONE; ++s)
         {
-            if (!strcmp (token, tokens[s]))
+            if (!strcmp (token, ku_string_get_cstring (tokens[s])))
                 return s;
         }
     }
 
     return S_NONE;
+}
+
+KU_VISIBLE bool
+ku_token_cstring_may_be_unfinished_separator (const char *token)
+{
+    if (token)
+    {
+        size_t len = strlen (token);
+
+        if (len)
+        {
+            for (KuSeparator s = SPACE; s < S_NONE; ++s)
+            {
+                if (len < ku_string_get_length (tokens[s]) &&
+                    !memcmp (token, ku_string_get_cstring (tokens[s]), len))
+                        return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 KU_VISIBLE bool

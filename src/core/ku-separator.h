@@ -55,6 +55,9 @@ typedef enum {
 } KuSeparator;
 
 KuSeparator ku_token_cstring_to_separator (const char *token);
-bool        ku_token_cstring_is_separator (const char *token);
+
+bool ku_token_cstring_may_be_unfinished_separator (const char *token);
+
+bool ku_token_cstring_is_separator (const char *token);
 
 #endif /*__KU_SEPARATOR_H__*/

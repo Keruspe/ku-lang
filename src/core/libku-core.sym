@@ -22,6 +22,7 @@ global:
     ku_token_cstring_to_reserved_keyword;
     ku_token_cstring_is_reserved_keyword;
     ku_token_cstring_to_separator;
+    ku_token_cstring_may_be_unfinished_separator;
     ku_token_cstring_is_separator;
     ku_token_new_reserved_keyword;
     ku_token_new_separator;
