@@ -80,6 +80,17 @@ test_token_separators (void)
 }
 
 static void
+test_token_minus_minus_arrow (void)
+{
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("--->"));
+    KuToken *token;
+    EXPECT_SEPARATOR (MINUS);
+    EXPECT_SEPARATOR (MINUS);
+    EXPECT_SEPARATOR (ARROW);
+    ku_lexer_free (l);
+}
+
+static void
 test_real_world_one (void)
 {
     KuLexer *l = ku_lexer_new (ku_stream_new_from_file (ku_file_new ("tests/data/test-one.ku", READ)));
@@ -176,6 +187,7 @@ main (int KU_UNUSED argc, char KU_UNUSED *argv[])
 {
     test_token_reserved_keywords ();
     test_token_separators ();
+    test_token_minus_minus_arrow ();
     test_real_world_one ();
     return 0;
 }
