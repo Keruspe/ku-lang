@@ -30,7 +30,7 @@ ku_file_mode_to_mode (KuFileMode mode)
         case READ_WRITE:
             return "rw+";
         case WRITE:
-            return "w+";
+            return "w";
         default:
             return "r";
     }
