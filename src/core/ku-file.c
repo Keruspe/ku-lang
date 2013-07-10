@@ -28,7 +28,7 @@ ku_file_mode_to_mode (KuFileMode mode)
     switch (mode)
     {
         case READ_WRITE:
-            return "rw+";
+            return "r+";
         case WRITE:
             return "w";
         default:
