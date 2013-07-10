@@ -3,7 +3,8 @@ global:
     ku_string_new;
     ku_string_is_empty;
     ku_string_read_char;
-    ku_string_equals;
+    ku_string_get_cstring;
+    ku_string_get_length;
     ku_string_free;
     ku_stream_new_from_file;
     ku_stream_new_from_string;

@@ -48,16 +48,16 @@ ku_string_read_char (KuString *string)
     return string->string[string->pos++];
 }
 
-KU_VISIBLE bool
-ku_string_equals (KuString *s1, KuString *s2)
+KU_VISIBLE const char *
+ku_string_get_cstring (KuString *string)
 {
-    if (s1 == s2)
-        return true;
+    return (string) ? string->string : NULL;
+}
 
-    if (!s1)
-        return false;
-
-    return !strcmp (s1->string, s2->string);
+KU_VISIBLE size_t
+ku_string_get_length (KuString *string)
+{
+    return (string) ? string->length : 0;
 }
 
 KU_VISIBLE void

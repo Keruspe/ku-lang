@@ -3,6 +3,7 @@
 #include <assert.h>
 
 #define EQUALS(a, b) a == b
+#define STREQ(s1, s2) !strcmp(ku_string_get_cstring (s1), s2)
 
 #define EXPECT_FULL(type, value, cmp)                          \
     token = ku_lexer_read_token (l);                           \
@@ -17,10 +18,7 @@
 
 #define EXPECT_KEYWORD(k)   EXPECT (reserved_keyword, k)
 
-#define EXPECT_STRING(s)                         \
-    str = ku_string_new (s);                     \
-    EXPECT_FULL (string, str, ku_string_equals); \
-    ku_string_free (str);
+#define EXPECT_STRING(s)    EXPECT_FULL (string, s, STREQ)
 
 #define EXPECT_KEYWORD_AND_SPACE(k) \
     EXPECT_KEYWORD (k);             \
@@ -86,7 +84,6 @@ test_real_world_one (void)
 {
     KuLexer *l = ku_lexer_new (ku_stream_new_from_file (ku_file_new ("tests/data/test-one.ku", READ)));
     KuToken *token;
-    KuString *str;
 
     EXPECT_KEYWORD   (BOOL);
     EXPECT_SEPARATOR (SPACE);
