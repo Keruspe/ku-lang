@@ -80,3 +80,37 @@ dist-hook:
 	else \
 	    echo A git clone is required to generate a ChangeLog >&2; \
 	fi
+
+
+# Code coverage support (shamelessly taken from systemd: http://cgit.freedesktop.org/systemd/systemd/commit/?id=6aea6d10f460853111ca8744201ec8dade97de3c)
+
+# .PHONY so it always rebuilds it
+.PHONY: coverage lcov-run lcov-report
+
+# run lcov from scratch, always
+coverage:
+	$(MAKE) lcov-run
+	$(MAKE) lcov-report
+
+coverage_dir = coverage
+coverage_opts = --base-directory $(srcdir) --directory $(builddir) --rc 'geninfo_adjust_src_path=$(abs_srcdir)=>$(abs_builddir)'
+
+if ENABLE_COVERAGE
+# reset run coverage tests
+lcov-run:
+	@rm -rf $(coverage_dir)
+	lcov $(coverage_opts) --zerocounters
+	-$(MAKE) check
+
+# generate report based on current coverage data
+lcov-report:
+	$(MKDIR_P) $(coverage_dir)
+	lcov $(coverage_opts) --compat-libtool --capture --no-external \
+		| sed 's|$(abs_builddir)|$(abs_srcdir)|' > $(coverage_dir)/.lcov.info
+	genhtml -t "ku test coverage" -o $(coverage_dir) $(coverage_dir)/.lcov.info
+	@echo "Coverage report generated in $(abs_builddir)/$(coverage_dir)/index.html"
+
+else
+lcov-run lcov-report:
+	echo "Need to reconfigure with --enable-coverage"
+endif

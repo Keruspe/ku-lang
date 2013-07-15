@@ -1,4 +1,7 @@
 Makefile
+coverage
+*.gcno
+*.gcda
 test-*
 !test-*.c
 !tests/data/*
