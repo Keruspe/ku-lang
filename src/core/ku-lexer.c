@@ -100,10 +100,9 @@ ku_lexer_read_token (KuLexer *lexer)
     KuToken *token;
     if (buf_eq_sep)
     {
-        if (ku_token_cstring_is_separator (lexer->buffer))
-            token = ku_token_new_separator (ku_token_cstring_to_separator (lexer->buffer));
-        else
-            token = ku_token_new_string (ku_string_new (lexer->buffer));
+        assert (ku_token_cstring_is_separator (lexer->buffer));
+
+        token = ku_token_new_separator (ku_token_cstring_to_separator (lexer->buffer));
         lexer->buffer[0] = '\0';
     }
     else if (ku_token_cstring_is_reserved_keyword (lexer->buffer))
