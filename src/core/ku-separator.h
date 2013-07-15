@@ -50,6 +50,11 @@ typedef enum {
     BQUOTE,
     EQUALS,
     ARROW,
+    DEC,
+    INC,
+    OR,
+    AND,
+    NOT,
     /* The token is not a reserved keyword */
     S_NONE
 } KuSeparator;

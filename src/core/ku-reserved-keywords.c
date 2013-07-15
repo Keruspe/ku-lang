@@ -39,6 +39,8 @@ static const char *tokens[K_NONE] = {
     [ELSE]     = "else",
     [ELIF]     = "elif",
     /* Builtins */
+    [LET]      = "let",
+    [BREAK]    = "break",
     [RETURN]   = "return",
     /* Loops */
     [DO]       = "do",
@@ -64,5 +66,6 @@ ku_token_cstring_to_reserved_keyword (const char *token)
 KU_VISIBLE bool
 ku_token_cstring_is_reserved_keyword (const char *token)
 {
+    printf ("tok <%s>\n", token);
     return (ku_token_cstring_to_reserved_keyword (token) != K_NONE);
 }

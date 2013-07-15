@@ -22,6 +22,8 @@ test_ku_reserved_keywords_full (void)
     TEST_KEYWORD ("if", IF);
     TEST_KEYWORD ("else", ELSE);
     TEST_KEYWORD ("elif", ELIF);
+    TEST_KEYWORD ("let", LET);
+    TEST_KEYWORD ("break", BREAK);
     TEST_KEYWORD ("return", RETURN);
     TEST_KEYWORD ("do", DO);
     TEST_KEYWORD ("while", WHILE);

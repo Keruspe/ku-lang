@@ -48,6 +48,8 @@ typedef enum {
     WHILE,
     FOR,
     /* Builtins */
+    LET,
+    BREAK,
     RETURN,
     /* The token is not a reserved keyword */
     K_NONE

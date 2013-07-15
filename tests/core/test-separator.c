@@ -32,6 +32,11 @@ test_ku_separators_full (void)
     TEST_SEPARATOR ("`",   BQUOTE);
     TEST_SEPARATOR ("=",   EQUALS);
     TEST_SEPARATOR ("->",  ARROW);
+    TEST_SEPARATOR ("--",  DEC);
+    TEST_SEPARATOR ("++",  INC);
+    TEST_SEPARATOR ("||",  OR);
+    TEST_SEPARATOR ("&&",  AND);
+    TEST_SEPARATOR ("!",   NOT);
     TEST_SEPARATOR ("abc", S_NONE);
 }
 

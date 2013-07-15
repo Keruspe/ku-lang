@@ -27,7 +27,7 @@
 static void
 test_token_reserved_keywords (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("char int long unsigned float double bool NULL TRUE FALSE if else elif return do while for "));
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("char int long unsigned float double bool NULL TRUE FALSE if else elif let break return do while for "));
     KuToken *token;
     EXPECT_KEYWORD_AND_SPACE (CHAR);
     EXPECT_KEYWORD_AND_SPACE (INT);
@@ -42,6 +42,8 @@ test_token_reserved_keywords (void)
     EXPECT_KEYWORD_AND_SPACE (IF);
     EXPECT_KEYWORD_AND_SPACE (ELSE);
     EXPECT_KEYWORD_AND_SPACE (ELIF);
+    EXPECT_KEYWORD_AND_SPACE (LET);
+    EXPECT_KEYWORD_AND_SPACE (BREAK);
     EXPECT_KEYWORD_AND_SPACE (RETURN);
     EXPECT_KEYWORD_AND_SPACE (DO);
     EXPECT_KEYWORD_AND_SPACE (WHILE);
@@ -52,7 +54,7 @@ test_token_reserved_keywords (void)
 static void
 test_token_separators (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+/*'\"`=->"));
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+/*'\"`=->--++||&&!"));
     KuToken *token;
     EXPECT_SEPARATOR (SPACE);
     EXPECT_SEPARATOR (NEWLINE);
@@ -76,16 +78,20 @@ test_token_separators (void)
     EXPECT_SEPARATOR (BQUOTE);
     EXPECT_SEPARATOR (EQUALS);
     EXPECT_SEPARATOR (ARROW);
+    EXPECT_SEPARATOR (DEC);
+    EXPECT_SEPARATOR (INC);
+    EXPECT_SEPARATOR (OR);
+    EXPECT_SEPARATOR (AND);
+    EXPECT_SEPARATOR (NOT);
     ku_lexer_free (l);
 }
 
 static void
-test_token_minus_minus_arrow (void)
+test_token_dec_arrow (void)
 {
     KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("--->"));
     KuToken *token;
-    EXPECT_SEPARATOR (MINUS);
-    EXPECT_SEPARATOR (MINUS);
+    EXPECT_SEPARATOR (DEC);
     EXPECT_SEPARATOR (ARROW);
     ku_lexer_free (l);
 }
@@ -148,8 +154,7 @@ test_real_world_one (void)
     EXPECT_SEPARATOR (SPACE);
     EXPECT_SEPARATOR (SPACE);
     EXPECT_STRING    ("f");
-    EXPECT_SEPARATOR (PLUS);
-    EXPECT_SEPARATOR (PLUS);
+    EXPECT_SEPARATOR (INC);
     EXPECT_SEPARATOR (SEMI_COLON);
     EXPECT_SEPARATOR (NEWLINE);
 
@@ -164,8 +169,7 @@ test_real_world_one (void)
     EXPECT_SEPARATOR (SPACE);
     EXPECT_SEPARATOR (SPACE);
     EXPECT_STRING    ("f");
-    EXPECT_SEPARATOR (MINUS);
-    EXPECT_SEPARATOR (MINUS);
+    EXPECT_SEPARATOR (DEC);
     EXPECT_SEPARATOR (SEMI_COLON);
     EXPECT_SEPARATOR (NEWLINE);
 
@@ -187,7 +191,7 @@ main (int KU_UNUSED argc, char KU_UNUSED *argv[])
 {
     test_token_reserved_keywords ();
     test_token_separators ();
-    test_token_minus_minus_arrow ();
+    test_token_dec_arrow ();
     test_real_world_one ();
     return 0;
 }

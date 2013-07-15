@@ -49,6 +49,11 @@ tokens_setup (void)
     tokens[BQUOTE] =        ku_string_new ("`");
     tokens[EQUALS] =        ku_string_new ("=");
     tokens[ARROW] =         ku_string_new ("->");
+    tokens[DEC] =           ku_string_new ("--");
+    tokens[INC] =           ku_string_new ("++");
+    tokens[OR] =            ku_string_new ("||");
+    tokens[AND] =           ku_string_new ("&&");
+    tokens[NOT] =           ku_string_new ("!");
 }
 
 static __attribute__((destructor)) void
