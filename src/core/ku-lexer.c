@@ -163,6 +163,7 @@ continue_str:
             size_t len = (_sep == S_NONE) ? strlen (sep) : ku_string_get_length (sep_str);
             if (lexer->delim == S_NONE)
             {
+                assert (_sep != S_NONE);
                 token = ku_token_new_separator (_sep);
                 lexer->buffer[0] = '\0';
             }
