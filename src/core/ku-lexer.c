@@ -81,10 +81,7 @@ ku_lexer_read_token (KuLexer *lexer)
                 }
             }
             if (ku_token_cstring_is_separator (lexer->buffer))
-            {
-                buf_eq_sep = true;
                 break;
-            }
         } while (!ku_token_cstring_is_separator (sep));
 
         size_t sep_len = strlen (sep);
