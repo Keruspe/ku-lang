@@ -56,14 +56,19 @@ ku_lexer_read_token (KuLexer *lexer)
     {
         do {
             assert (lexer->index <= 254);
-            sep[0] = ku_stream_read_char (lexer->stream);
-            if (sep[0] == '\0')
+            char read = ku_stream_read_char (lexer->stream);
+            if (!read)
                 break;
-            lexer->buffer[lexer->index++] = sep[0];
+            if (read == '\\')
+                read = ku_stream_read_char (lexer->stream);
+            else
+                sep[0] = read;
+            lexer->buffer[lexer->index++] = read;
 
             sep[1] = '\0';
             if (ku_token_cstring_may_be_unfinished_separator (sep))
             {
+                // TODO: handle backslash here. Syntax error ?
                 sep[1] = ku_stream_read_char (lexer->stream);
                 if (!sep[1])
                     break;
