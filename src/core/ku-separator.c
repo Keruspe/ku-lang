@@ -18,8 +18,8 @@
  */
 
 #include "ku-separator.h"
-#include "ku-string.h"
 
+#include <assert.h>
 #include <string.h>
 
 static KuString *tokens[S_NONE];
@@ -103,4 +103,26 @@ KU_VISIBLE bool
 ku_token_cstring_is_separator (const char *token)
 {
     return (ku_token_cstring_to_separator (token) != S_NONE);
+}
+
+KU_VISIBLE bool
+ku_separator_is_delimitation (KuSeparator sep)
+{
+    switch (sep)
+    {
+    case SQUOTE:
+    case DQUOTE:
+    case BQUOTE:
+        return true;
+    default:
+        return false;
+    }
+}
+
+KU_VISIBLE const KuString *
+ku_separator_to_string (KuSeparator sep)
+{
+    assert (sep <= S_NONE);
+
+    return tokens[sep];
 }

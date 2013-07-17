@@ -24,7 +24,7 @@
 #include "config.h"
 #endif
 
-#include <stdbool.h>
+#include "ku-string.h"
 
 typedef enum {
     SPACE,
@@ -64,5 +64,9 @@ KuSeparator ku_token_cstring_to_separator (const char *token);
 bool ku_token_cstring_may_be_unfinished_separator (const char *token);
 
 bool ku_token_cstring_is_separator (const char *token);
+
+bool ku_separator_is_delimitation (KuSeparator sep);
+
+const KuString *ku_separator_to_string (KuSeparator sep);
 
 #endif /*__KU_SEPARATOR_H__*/

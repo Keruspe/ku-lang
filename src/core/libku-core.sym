@@ -24,6 +24,8 @@ global:
     ku_token_cstring_to_separator;
     ku_token_cstring_may_be_unfinished_separator;
     ku_token_cstring_is_separator;
+    ku_separator_is_delimitation;
+    ku_separator_to_string;
     ku_token_new_reserved_keyword;
     ku_token_new_separator;
     ku_token_new_string;
