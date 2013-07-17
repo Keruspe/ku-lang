@@ -54,7 +54,7 @@ test_token_reserved_keywords (void)
 static void
 test_token_separators (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+/*'\"`=->--++||&&!"));
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring (" \n\t:;(){}[].,-+/*''\"\"``=->--++||&&!"));
     KuToken *token;
     EXPECT_SEPARATOR (SPACE);
     EXPECT_SEPARATOR (NEWLINE);
@@ -74,7 +74,10 @@ test_token_separators (void)
     EXPECT_SEPARATOR (DIVIDE);
     EXPECT_SEPARATOR (TIMES);
     EXPECT_SEPARATOR (SQUOTE);
+    EXPECT_SEPARATOR (SQUOTE);
     EXPECT_SEPARATOR (DQUOTE);
+    EXPECT_SEPARATOR (DQUOTE);
+    EXPECT_SEPARATOR (BQUOTE);
     EXPECT_SEPARATOR (BQUOTE);
     EXPECT_SEPARATOR (EQUALS);
     EXPECT_SEPARATOR (ARROW);
@@ -99,10 +102,21 @@ test_token_dec_arrow (void)
 static void
 test_token_backslash (void)
 {
-    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("\"foo\\\"bar\\\\baz\""));
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("\"\\\"foo\\\"bar\\\\baz\""));
     KuToken *token;
     EXPECT_SEPARATOR (DQUOTE);
-    EXPECT_STRING    ("foo\"bar\\baz");
+    EXPECT_STRING    ("\"foo\"bar\\baz");
+    EXPECT_SEPARATOR (DQUOTE);
+    ku_lexer_free (l);
+}
+
+static void
+test_token_string_with_seps (void)
+{
+    KuLexer *l = ku_lexer_new (ku_stream_new_from_cstring ("\"foo bar-baz\""));
+    KuToken *token;
+    EXPECT_SEPARATOR (DQUOTE);
+    EXPECT_STRING    ("foo bar-baz");
     EXPECT_SEPARATOR (DQUOTE);
     ku_lexer_free (l);
 }
@@ -204,6 +218,7 @@ main (int KU_UNUSED argc, char KU_UNUSED *argv[])
     test_token_separators ();
     test_token_dec_arrow ();
     test_token_backslash ();
+    test_token_string_with_seps ();
     test_real_world_one ();
     return 0;
 }
