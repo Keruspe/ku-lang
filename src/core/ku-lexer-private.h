@@ -28,6 +28,7 @@ struct _KuLexer
     char         buffer[256];
     unsigned int index;
     char         backup;
+    KuSeparator  delim;
 };
 
 #endif /*__KU_LEXER_PRIVATE_H__*/
