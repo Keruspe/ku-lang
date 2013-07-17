@@ -34,7 +34,7 @@ ku_string_new (const char *string)
 }
 
 KU_VISIBLE bool
-ku_string_is_empty (KuString *string)
+ku_string_is_empty (const KuString *string)
 {
     return (!string || string->pos >= string->length);
 }
@@ -49,13 +49,13 @@ ku_string_read_char (KuString *string)
 }
 
 KU_VISIBLE const char *
-ku_string_get_cstring (KuString *string)
+ku_string_get_cstring (const KuString *string)
 {
     return (string) ? string->string : NULL;
 }
 
 KU_VISIBLE size_t
-ku_string_get_length (KuString *string)
+ku_string_get_length (const KuString *string)
 {
     return (string) ? string->length : 0;
 }

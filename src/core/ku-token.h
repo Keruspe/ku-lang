@@ -28,6 +28,7 @@
 
 typedef struct _KuToken KuToken;
 
+/* FIXME: _Generic */
 KuToken *ku_token_new_reserved_keyword (KuReservedKeyword keyword);
 KuToken *ku_token_new_separator        (KuSeparator       separator);
 KuToken *ku_token_new_string           (KuString         *string);
@@ -36,9 +37,9 @@ bool ku_token_is_reserved_keyword (KuToken *token);
 bool ku_token_is_separator        (KuToken *token);
 bool ku_token_is_string           (KuToken *token);
 
-KuReservedKeyword ku_token_get_reserved_keyword_value (KuToken *token);
-KuSeparator       ku_token_get_separator_value        (KuToken *token);
-KuString         *ku_token_get_string_value           (KuToken *token);
+KuReservedKeyword ku_token_get_reserved_keyword_value (const KuToken *token);
+KuSeparator       ku_token_get_separator_value        (const KuToken *token);
+const KuString   *ku_token_get_string_value           (const KuToken *token);
 
 void ku_token_free (KuToken *token);
 

@@ -82,21 +82,21 @@ ku_token_is_string (KuToken *token)
 }
 
 KU_VISIBLE KuReservedKeyword
-ku_token_get_reserved_keyword_value (KuToken *token)
+ku_token_get_reserved_keyword_value (const KuToken *token)
 {
     assert (token && token->type_check_ok);
     return token->value.reserved_keyword;
 }
 
 KU_VISIBLE KuSeparator
-ku_token_get_separator_value (KuToken *token)
+ku_token_get_separator_value (const KuToken *token)
 {
     assert (token && token->type_check_ok);
     return token->value.separator;
 }
 
-KU_VISIBLE KuString *
-ku_token_get_string_value (KuToken *token)
+KU_VISIBLE const KuString *
+ku_token_get_string_value (const KuToken *token)
 {
     assert (token && token->type_check_ok);
     return token->value.string;
@@ -108,7 +108,7 @@ ku_token_free (KuToken *token)
     if (token)
     {
         if (ku_token_is_string (token))
-            ku_string_free (ku_token_get_string_value (token));
+            ku_string_free (token->value.string);
         free (token);
     }
 }

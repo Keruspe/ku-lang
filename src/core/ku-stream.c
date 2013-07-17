@@ -53,7 +53,7 @@ ku_stream_new_from_cstring (const char *string)
 }
 
 KU_VISIBLE bool
-ku_stream_is_empty (KuStream *stream)
+ku_stream_is_empty (const KuStream *stream)
 {
     return (!stream || (ku_file_is_empty (stream->file) && ku_string_is_empty (stream->string)));
 }

@@ -32,11 +32,11 @@ typedef struct _KuString KuString;
 
 KuString *ku_string_new (const char *string);
 
-bool ku_string_is_empty  (KuString *string);
-char ku_string_read_char (KuString *string);
+bool ku_string_is_empty  (const KuString *string);
+char ku_string_read_char (      KuString *string);
 
-const char *ku_string_get_cstring (KuString *string);
-size_t      ku_string_get_length  (KuString *string);
+const char *ku_string_get_cstring (const KuString *string);
+size_t      ku_string_get_length  (const KuString *string);
 
 void ku_string_free (KuString *string);
 
