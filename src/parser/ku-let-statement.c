@@ -23,7 +23,7 @@ KU_VISIBLE KuLetStatement *
 ku_let_statement_new (void)
 {
     KuLetStatement *stmt = (KuLetStatement *) malloc (sizeof (KuLetStatement));
-    ku_statement_init (KU_STATEMENT (stmt), LET_STMT);
+    ku_statement_init (KU_STATEMENT (stmt), LET_STMT, false);
     stmt->name = NULL;
     stmt->rvalue = NULL;
     return stmt;

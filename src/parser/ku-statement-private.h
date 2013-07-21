@@ -30,7 +30,8 @@ typedef enum
 struct _KuStatement
 {
     KuStatementType type;
-    KuStatement *next;
+    KuStatement    *next;
+    bool            valuable;
 };
 
 #endif /*__KU_STATEMENT_PRIVATE_H__*/

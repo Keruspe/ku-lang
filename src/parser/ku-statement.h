@@ -25,6 +25,7 @@ typedef struct _KuStatement KuStatement;
 #define KU_STATEMENT(x) ((KuStatement *) x)
 
 void ku_statement_init (KuStatement    *stmt,
-                        KuStatementType type);
+                        KuStatementType type,
+                        bool            valuable);
 
 #endif /*__KU_STATEMENT_H__*/
