@@ -17,22 +17,16 @@
  *      along with ku.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __KU_STATEMENT_PRIVATE_H__
-#define __KU_STATEMENT_PRIVATE_H__
+#ifndef __KU_BOOLEAN_STATEMENT_PRIVATE_H__
+#define __KU_BOOLEAN_STATEMENT_PRIVATE_H__
 
 #include "ku-statement.h"
+#include "ku-boolean-statement.h"
 
-typedef enum
+struct _KuBooleanStatement
 {
-    BOOL_STMT,
-    LET_STMT
-} KuStatementType;
-
-struct _KuStatement
-{
-    KuStatementType type;
-    KuStatement    *next;
-    bool            valuable;
+    KuStatement     parent;
+    bool            value;
 };
 
-#endif /*__KU_STATEMENT_PRIVATE_H__*/
+#endif /*__KU_BOOLEAN_STATEMENT_PRIVATE_H__*/
