@@ -24,6 +24,7 @@ AM_DISTCHECK_CONFIGURE_FLAGS = \
 
 AM_CPPFLAGS =                   \
 	-I$(srcdir)/src/core    \
+	-I$(srcdir)/src/lexer   \
 	-DKU_COMPILATION        \
 	-DSRC_DIR=\"$(srcdir)\" \
 	$(NULL)
@@ -47,8 +48,10 @@ TESTS =
 # Real stuff goes in these subfiles
 
 include src/core.mk
+include src/lexer.mk
 
 include tests/core.mk
+include tests/lexer.mk
 
 noinst_PROGRAMS += $(TESTS)
 

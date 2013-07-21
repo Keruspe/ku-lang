@@ -1,0 +1,21 @@
+LIBKU_LEXER_1 {
+global:
+    ku_token_new_reserved_keyword;
+    ku_token_new_separator;
+    ku_token_new_literal;
+    ku_token_new_string;
+    ku_token_is_reserved_keyword;
+    ku_token_is_separator;
+    ku_token_is_literal;
+    ku_token_is_string;
+    ku_token_get_reserved_keyword_value;
+    ku_token_get_separator_value;
+    ku_token_get_literal_value;
+    ku_token_get_string_value;
+    ku_token_free;
+    ku_lexer_new;
+    ku_lexer_read_token;
+    ku_lexer_free;
+local:
+    *;
+};
