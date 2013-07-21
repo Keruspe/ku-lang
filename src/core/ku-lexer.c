@@ -139,7 +139,7 @@ continue_str:
     else if (lexer->delim == S_NONE)
     {
         assert (strlen (lexer->buffer));
-        token = ku_token_new_string (ku_string_new (lexer->buffer));
+        token = ku_token_new_literal (ku_string_new (lexer->buffer));
         strcpy (lexer->buffer, sep);
     }
 

@@ -47,6 +47,14 @@ ku_token_new_separator (KuSeparator separator)
 }
 
 KU_VISIBLE KuToken *
+ku_token_new_literal (KuString *string)
+{
+    KuToken *token = _ku_token_new (KU_TOKEN_LITERAL);
+    token->value.literal = string;
+    return token;
+}
+
+KU_VISIBLE KuToken *
 ku_token_new_string (KuString *string)
 {
     KuToken *token = _ku_token_new (KU_TOKEN_STRING);
@@ -73,6 +81,15 @@ ku_token_is_separator (KuToken *token)
 }
 
 KU_VISIBLE bool
+ku_token_is_literal (KuToken *token)
+{
+    if (!token || token->type != KU_TOKEN_LITERAL)
+        return false;
+    token->type_check_ok = true;
+    return true;
+}
+
+KU_VISIBLE bool
 ku_token_is_string (KuToken *token)
 {
     if (!token || token->type != KU_TOKEN_STRING)
@@ -93,6 +110,13 @@ ku_token_get_separator_value (const KuToken *token)
 {
     assert (token && token->type_check_ok);
     return token->value.separator;
+}
+
+KU_VISIBLE const KuString *
+ku_token_get_literal_value (const KuToken *token)
+{
+    assert (token && token->type_check_ok);
+    return token->value.literal;
 }
 
 KU_VISIBLE const KuString *

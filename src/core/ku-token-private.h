@@ -26,6 +26,7 @@ typedef enum
 {
     KU_TOKEN_RESERVED_KEYWORD,
     KU_TOKEN_SEPARATOR,
+    KU_TOKEN_LITERAL,
     KU_TOKEN_STRING
 } KuTokenType;
 
@@ -35,6 +36,7 @@ struct _KuToken
     union {
         KuReservedKeyword reserved_keyword;
         KuSeparator       separator;
+        KuString         *literal;
         KuString         *string;
     } value;
     bool type_check_ok;
