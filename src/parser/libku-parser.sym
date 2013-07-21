@@ -1,0 +1,7 @@
+LIBKU_PARSER_1 {
+global:
+    ku_parser_new;
+    ku_parser_free;
+local:
+    *;
+};
