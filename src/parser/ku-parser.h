@@ -21,10 +21,13 @@
 #define __KU_PARSER_H__
 
 #include "ku-lexer.h"
+#include "ku-statement.h"
 
 typedef struct _KuParser KuParser;
 
 KuParser *ku_parser_new (KuStream *stream);
+
+KuStatement *ku_parser_parse (KuParser *parser);
 
 void ku_parser_free (KuParser *parser);
 
