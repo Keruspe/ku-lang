@@ -119,7 +119,9 @@ continue_str:
 
     KuToken *token = NULL;
     KuSeparator _sep = S_NONE;
-    if (buf_eq_sep)
+    if (!lexer->index)
+        token = ku_token_new_end_of_file ();
+    else if (buf_eq_sep)
     {
         assert (ku_token_cstring_is_separator (lexer->buffer));
 

@@ -1,9 +1,11 @@
 LIBKU_LEXER_1 {
 global:
+    ku_token_new_end_of_file;
     ku_token_new_reserved_keyword;
     ku_token_new_separator;
     ku_token_new_literal;
     ku_token_new_string;
+    ku_token_is_end_of_file;
     ku_token_is_reserved_keyword;
     ku_token_is_separator;
     ku_token_is_literal;

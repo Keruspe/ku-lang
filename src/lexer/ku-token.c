@@ -31,6 +31,13 @@ _ku_token_new (KuTokenType type)
 }
 
 KU_VISIBLE KuToken *
+ku_token_new_end_of_file (void)
+{
+    KuToken *token = _ku_token_new (KU_TOKEN_END_OF_FILE);
+    return token;
+}
+
+KU_VISIBLE KuToken *
 ku_token_new_reserved_keyword (KuReservedKeyword keyword)
 {
     KuToken *token = _ku_token_new (KU_TOKEN_RESERVED_KEYWORD);
@@ -60,6 +67,15 @@ ku_token_new_string (KuString *string)
     KuToken *token = _ku_token_new (KU_TOKEN_STRING);
     token->value.string = string;
     return token;
+}
+
+KU_VISIBLE bool
+ku_token_is_end_of_file (KuToken *token)
+{
+    if (!token || token->type != KU_TOKEN_END_OF_FILE)
+        return false;
+    token->type_check_ok = true;
+    return true;
 }
 
 KU_VISIBLE bool

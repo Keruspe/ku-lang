@@ -28,11 +28,13 @@
 
 typedef struct _KuToken KuToken;
 
+KuToken *ku_token_new_end_of_file      (void);
 KuToken *ku_token_new_reserved_keyword (KuReservedKeyword keyword);
 KuToken *ku_token_new_separator        (KuSeparator       separator);
 KuToken *ku_token_new_literal          (KuString         *literal);
 KuToken *ku_token_new_string           (KuString         *string);
 
+bool ku_token_is_end_of_file      (KuToken *token);
 bool ku_token_is_reserved_keyword (KuToken *token);
 bool ku_token_is_separator        (KuToken *token);
 bool ku_token_is_literal          (KuToken *token);
