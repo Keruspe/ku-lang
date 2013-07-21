@@ -17,6 +17,7 @@ global:
     ku_token_free;
     ku_lexer_new;
     ku_lexer_read_token;
+    ku_lexer_read_token_no_spaces;
     ku_lexer_free;
     ku_token_cstring_to_reserved_keyword;
     ku_token_cstring_is_reserved_keyword;

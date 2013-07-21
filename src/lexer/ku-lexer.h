@@ -29,6 +29,8 @@ KuLexer *ku_lexer_new (KuStream *stream);
 
 KuToken *ku_lexer_read_token (KuLexer *lexer);
 
+KuToken *ku_lexer_read_token_no_spaces (KuLexer *lexer);
+
 void ku_lexer_free (KuLexer *lexer);
 
 #endif /*__KU_LEXER_H__*/

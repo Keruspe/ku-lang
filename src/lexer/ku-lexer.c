@@ -18,6 +18,7 @@
  */
 
 #include "ku-lexer-private.h"
+#include "ku-token-private.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -184,6 +185,30 @@ continue_str:
         }
     }
 
+    return token;
+}
+
+static bool
+token_is_space (KuToken *token)
+{
+    if (token->type != KU_TOKEN_SEPARATOR)
+        return false;
+    switch (token->value.separator)
+    {
+    case SPACE:
+    case TAB:
+    case NEWLINE:
+        return true;
+    default:
+        return false;
+    }
+}
+
+KU_VISIBLE KuToken *
+ku_lexer_read_token_no_spaces (KuLexer *lexer)
+{
+    KuToken *token;
+    while ((token = ku_lexer_read_token (lexer)) && token_is_space (token));
     return token;
 }
 
