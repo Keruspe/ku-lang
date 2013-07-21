@@ -1,11 +1,14 @@
-bool test = TRUE;
-Foo *f = NULL;
-if (test)
-    f->bar;
-elif (f->baz)
-    f++;
-else
-{
-    f--;
-}
-return 0;
+let test = TRUE;
+let f : *Foo = NULL;
+f->new;
+let weird f = {
+    if (test)
+        f->bar;
+    elif (f->baz)
+        f->bar++;
+    else
+    {
+        --f->bar;
+    }
+};
+weird f;
