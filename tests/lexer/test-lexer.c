@@ -32,6 +32,12 @@
         EXPECT_SEPARATOR (SPACE);        \
     }
 
+#define END_TEST                              \
+    token = ku_lexer_read_token (l);          \
+    assert (ku_token_is_end_of_file (token)); \
+    ku_lexer_free (l)
+
+
 static void
 test_token_reserved_keywords (void)
 {
@@ -56,7 +62,7 @@ test_token_reserved_keywords (void)
     EXPECT_KEYWORD_AND_SPACE (DO);
     EXPECT_KEYWORD_AND_SPACE (WHILE);
     EXPECT_KEYWORD           (FOR);
-    ku_lexer_free (l);
+    END_TEST;
 }
 
 static void
@@ -94,7 +100,7 @@ test_token_separators (void)
     EXPECT_SEPARATOR (OR);
     EXPECT_SEPARATOR (AND);
     EXPECT_SEPARATOR (NOT);
-    ku_lexer_free (l);
+    END_TEST;
 }
 
 static void
@@ -104,7 +110,7 @@ test_token_dec_arrow (void)
     KuToken *token;
     EXPECT_SEPARATOR (DEC);
     EXPECT_SEPARATOR (ARROW);
-    ku_lexer_free (l);
+    END_TEST;
 }
 
 static void
@@ -115,7 +121,7 @@ test_token_backslash (void)
     EXPECT_SEPARATOR (DQUOTE);
     EXPECT_STRING    ("\"foo\"bar\\baz");
     EXPECT_SEPARATOR (DQUOTE);
-    ku_lexer_free (l);
+    END_TEST;
 }
 
 static void
@@ -126,7 +132,7 @@ test_token_string_with_seps (void)
     EXPECT_SEPARATOR (DQUOTE);
     EXPECT_STRING    ("foo bar-baz");
     EXPECT_SEPARATOR (DQUOTE);
-    ku_lexer_free (l);
+    END_TEST;
 }
 
 static void
@@ -240,7 +246,7 @@ test_real_world_one (void)
     EXPECT_SEPARATOR (SEMI_COLON);
     EXPECT_SEPARATOR (NEWLINE);
 
-    ku_lexer_free (l);
+    END_TEST;
 }
 
 int
