@@ -38,6 +38,8 @@ char ku_string_read_char (      KuString *string);
 const char *ku_string_get_cstring (const KuString *string);
 size_t      ku_string_get_length  (const KuString *string);
 
+KuString *ku_string_dup (const KuString *string);
+
 void ku_string_free (KuString *string);
 
 #endif /*__KU_STRING_H__*/

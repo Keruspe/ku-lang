@@ -20,15 +20,15 @@
 #ifndef __KU_LET_STATEMENT_PRIVATE_H__
 #define __KU_LET_STATEMENT_PRIVATE_H__
 
-#include "ku-statement.h"
+#include "ku-string.h"
+#include "ku-statement-private.h"
 #include "ku-let-statement.h"
 
 struct _KuLetStatement
 {
-    KuStatement     parent;
-    const KuString *name;
-    KuString       *args[32];
-    KuStatement    *rvalue;
+    KuStatement  parent;
+    KuString    *name;
+    KuStatement *rvalue;
 };
 
 #endif /*__KU_LET_STATEMENT_PRIVATE_H__*/

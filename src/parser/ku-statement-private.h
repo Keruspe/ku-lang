@@ -22,12 +22,6 @@
 
 #include "ku-statement.h"
 
-typedef enum
-{
-    BOOL_STMT,
-    LET_STMT
-} KuStatementType;
-
 struct _KuStatement
 {
     KuStatementType type;

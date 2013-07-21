@@ -20,9 +20,22 @@
 #ifndef __KU_STATEMENT_H__
 #define __KU_STATEMENT_H__
 
-typedef struct _KuStatement KuStatement;
+#ifdef KU_COMPILATION
+#include "config.h"
+#endif
+
+#include <stdbool.h>
+#include <stdlib.h>
 
 #define KU_STATEMENT(x) ((KuStatement *) x)
+
+typedef struct _KuStatement KuStatement;
+
+typedef enum
+{
+    BOOL_STMT,
+    LET_STMT
+} KuStatementType;
 
 void ku_statement_init (KuStatement    *stmt,
                         KuStatementType type,

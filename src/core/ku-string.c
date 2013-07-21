@@ -19,6 +19,14 @@
 
 #include "ku-string-private.h"
 
+static KuString *
+_ku_string_new (size_t length)
+{
+    KuString *s = (KuString *) malloc (sizeof (KuString) + (length + 1) * sizeof (char));
+    s->length = length;
+    return s;
+}
+
 KU_VISIBLE KuString *
 ku_string_new (const char *string)
 {
@@ -26,10 +34,9 @@ ku_string_new (const char *string)
         return NULL;
 
     size_t length = strlen (string);
-    KuString *s = (KuString *) malloc (sizeof (KuString) + (length + 1) * sizeof (char));
+    KuString *s = _ku_string_new (length);
     strcpy (s->string, string);
     s->pos = 0;
-    s->length = length;
     return s;
 }
 
@@ -58,6 +65,18 @@ KU_VISIBLE size_t
 ku_string_get_length (const KuString *string)
 {
     return (string) ? string->length : 0;
+}
+
+KU_VISIBLE KuString *
+ku_string_dup (const KuString *string)
+{
+    if (!string)
+        return NULL;
+
+    KuString *s = _ku_string_new (string->length);
+    strcpy (s->string, string->string);
+    s->pos = string->pos;
+    return s;
 }
 
 KU_VISIBLE void

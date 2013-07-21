@@ -20,6 +20,8 @@
 #ifndef __KU_BOOLEAN_STATEMENT_H__
 #define __KU_BOOLEAN_STATEMENT_H__
 
+#define KU_BOOLEAN_STATEMENT(x) ((KuBooleanStatement *) x)
+
 typedef struct _KuBooleanStatement KuBooleanStatement;
 
 KuBooleanStatement *ku_boolean_statement_new (bool value);

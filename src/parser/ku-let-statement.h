@@ -20,6 +20,8 @@
 #ifndef __KU_LET_STATEMENT_H__
 #define __KU_LET_STATEMENT_H__
 
+#define KU_LET_STATEMENT(x) ((KuLetStatement *) x)
+
 typedef struct _KuLetStatement KuLetStatement;
 
 KuLetStatement *ku_let_statement_new (void);

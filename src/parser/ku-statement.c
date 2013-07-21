@@ -22,7 +22,7 @@
 KU_VISIBLE void
 ku_statement_init (KuStatement    *stmt,
                    KuStatementType type,
-                   boolean         valuable)
+                   bool            valuable)
 {
     stmt->type = type;
     stmt->next = NULL;

@@ -20,10 +20,10 @@
 #include "ku-boolean-statement-private.h"
 
 KU_VISIBLE KuBooleanStatement *
-ku_boolean_statement_new (void)
+ku_boolean_statement_new (bool value)
 {
     KuBooleanStatement *stmt = (KuBooleanStatement *) malloc (sizeof (KuBooleanStatement));
     ku_statement_init (KU_STATEMENT (stmt), BOOL_STMT, true);
-    stmt->value = true;
+    stmt->value = value;
     return stmt;
 }

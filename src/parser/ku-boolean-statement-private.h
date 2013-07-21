@@ -20,7 +20,7 @@
 #ifndef __KU_BOOLEAN_STATEMENT_PRIVATE_H__
 #define __KU_BOOLEAN_STATEMENT_PRIVATE_H__
 
-#include "ku-statement.h"
+#include "ku-statement-private.h"
 #include "ku-boolean-statement.h"
 
 struct _KuBooleanStatement
