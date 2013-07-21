@@ -72,7 +72,12 @@ continue_str:
             bool escaped = false;
             char read = ku_stream_read_char (lexer->stream);
             if (!read)
+            {
+                size_t len = strlen (sep);
+                for (unsigned int i = 0; i < len; ++i)
+                    append (lexer, sep[i]);
                 break;
+            }
             if (read == '\\')
             {
                 read = ku_stream_read_char (lexer->stream);
