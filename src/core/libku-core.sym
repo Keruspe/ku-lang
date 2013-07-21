@@ -19,13 +19,6 @@ global:
     ku_file_write;
     ku_file_delete;
     ku_file_free;
-    ku_token_cstring_to_reserved_keyword;
-    ku_token_cstring_is_reserved_keyword;
-    ku_token_cstring_to_separator;
-    ku_token_cstring_may_be_unfinished_separator;
-    ku_token_cstring_is_separator;
-    ku_separator_is_delimitation;
-    ku_separator_to_string;
 local:
     *;
 };

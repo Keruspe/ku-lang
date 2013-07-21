@@ -15,8 +15,10 @@
 # You should have received a copy of the GNU General Public License
 # along with ku.  If not, see <http://www.gnu.org/licenses/>.
 
-TESTS +=                       \
-	tests/lexer/test-lexer \
+TESTS +=                                   \
+	tests/lexer/test-lexer             \
+	tests/lexer/test-reserved-keywords \
+	tests/lexer/test-separator         \
 	$(NULL)
 
 tests_lexer_test_lexer_SOURCES = \
@@ -25,6 +27,22 @@ tests_lexer_test_lexer_SOURCES = \
 
 tests_lexer_test_lexer_LDADD = \
 	$(libku_lexer_la_file) \
+	$(NULL)
+
+tests_lexer_test_reserved_keywords_SOURCES = \
+	tests/lexer/test-reserved-keywords.c \
+	$(NULL)
+
+tests_lexer_test_reserved_keywords_LDADD =  \
+	$(libku_lexer_la_file)              \
+	$(NULL)
+
+tests_lexer_test_separator_SOURCES = \
+	tests/lexer/test-separator.c \
+	$(NULL)
+
+tests_lexer_test_separator_LDADD = \
+	$(libku_lexer_la_file)  \
 	$(NULL)
 
 EXTRA_DIST +=                  \

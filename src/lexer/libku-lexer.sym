@@ -18,6 +18,13 @@ global:
     ku_lexer_new;
     ku_lexer_read_token;
     ku_lexer_free;
+    ku_token_cstring_to_reserved_keyword;
+    ku_token_cstring_is_reserved_keyword;
+    ku_token_cstring_to_separator;
+    ku_token_cstring_may_be_unfinished_separator;
+    ku_token_cstring_is_separator;
+    ku_separator_is_delimitation;
+    ku_separator_to_string;
 local:
     *;
 };

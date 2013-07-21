@@ -21,9 +21,11 @@ LIBKU_LEXER_CURRENT=0
 LIBKU_LEXER_REVISION=0
 LIBKU_LEXER_AGE=0
 
-libku_lexer_public_headers = \
-	src/lexer/ku-lexer.h \
-	src/lexer/ku-token.h \
+libku_lexer_public_headers =             \
+	src/lexer/ku-lexer.h             \
+	src/lexer/ku-reserved-keywords.h \
+	src/lexer/ku-separator.h         \
+	src/lexer/ku-token.h             \
 	$(NULL)
 
 libku_lexer_private_headers =        \
@@ -31,11 +33,13 @@ libku_lexer_private_headers =        \
 	src/lexer/ku-token-private.h \
 	$(NULL)
 
-src_lexer_libku_lexer_la_SOURCES =     \
-	$(libku_lexer_public_headers)  \
-	$(libku_lexer_private_headers) \
-	src/lexer/ku-lexer.c           \
-	src/lexer/ku-token.c           \
+src_lexer_libku_lexer_la_SOURCES =       \
+	$(libku_lexer_public_headers)    \
+	$(libku_lexer_private_headers)   \
+	src/lexer/ku-lexer.c             \
+	src/lexer/ku-reserved-keywords.c \
+	src/lexer/ku-separator.c         \
+	src/lexer/ku-token.c             \
 	$(NULL)
 
 libku_lexer_symbols_file = $(srcdir)/src/lexer/libku-lexer.sym

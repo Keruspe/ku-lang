@@ -21,12 +21,10 @@ LIBKU_CORE_CURRENT=0
 LIBKU_CORE_REVISION=0
 LIBKU_CORE_AGE=0
 
-libku_core_public_headers =             \
-	src/core/ku-file.h              \
-	src/core/ku-reserved-keywords.h \
-	src/core/ku-separator.h         \
-	src/core/ku-stream.h            \
-	src/core/ku-string.h            \
+libku_core_public_headers =  \
+	src/core/ku-file.h   \
+	src/core/ku-stream.h \
+	src/core/ku-string.h \
 	$(NULL)
 
 libku_core_private_headers =         \
@@ -35,14 +33,12 @@ libku_core_private_headers =         \
 	src/core/ku-string-private.h \
 	$(NULL)
 
-src_core_libku_core_la_SOURCES =        \
-	$(libku_core_public_headers)    \
-	$(libku_core_private_headers)   \
-	src/core/ku-file.c              \
-	src/core/ku-reserved-keywords.c \
-	src/core/ku-separator.c         \
-	src/core/ku-stream.c            \
-	src/core/ku-string.c            \
+src_core_libku_core_la_SOURCES =      \
+	$(libku_core_public_headers)  \
+	$(libku_core_private_headers) \
+	src/core/ku-file.c            \
+	src/core/ku-stream.c          \
+	src/core/ku-string.c          \
 	$(NULL)
 
 libku_core_symbols_file = $(srcdir)/src/core/libku-core.sym
