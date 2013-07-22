@@ -22,12 +22,14 @@ LIBKU_CORE_REVISION=0
 LIBKU_CORE_AGE=0
 
 libku_core_public_headers =  \
+	src/core/ku-list.h   \
 	src/core/ku-file.h   \
 	src/core/ku-stream.h \
 	src/core/ku-string.h \
 	$(NULL)
 
 libku_core_private_headers =         \
+	src/core/ku-list-private.h   \
 	src/core/ku-file-private.h   \
 	src/core/ku-stream-private.h \
 	src/core/ku-string-private.h \
@@ -36,6 +38,7 @@ libku_core_private_headers =         \
 src_core_libku_core_la_SOURCES =      \
 	$(libku_core_public_headers)  \
 	$(libku_core_private_headers) \
+	src/core/ku-list.c            \
 	src/core/ku-file.c            \
 	src/core/ku-stream.c          \
 	src/core/ku-string.c          \

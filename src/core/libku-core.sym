@@ -20,6 +20,13 @@ global:
     ku_file_write;
     ku_file_delete;
     ku_file_free;
+    ku_list_new;
+    ku_list_prepend;
+    ku_list_append;
+    ku_list_prev;
+    ku_list_next;
+    ku_list_get_data_raw;
+    ku_list_free;
 local:
     *;
 };
