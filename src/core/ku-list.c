@@ -49,7 +49,7 @@ ku_list_prepend (KuList *list,
         return list;
     if (!list)
         return ku_list_new (data);
-    return list->prev = _ku_list_new (NULL, list, data);
+    return list->prev = _ku_list_new (list->prev, list, data);
 }
 
 KU_VISIBLE KuList *
