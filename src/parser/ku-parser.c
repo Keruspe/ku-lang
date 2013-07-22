@@ -20,6 +20,7 @@
 #include "ku-parser-private.h"
 
 #include "ku-boolean-statement.h"
+#include "ku-null-statement.h"
 #include "ku-let-statement-private.h"
 
 #include <assert.h>
@@ -34,6 +35,24 @@ ku_parser_new (KuStream *stream)
     return parser;
 }
 
+static KuType *
+parse_type (KuParser *parser)
+{
+    KuToken *token = ku_lexer_read_token_no_spaces (parser->lexer);
+    bool mutable = false;
+    if (ku_token_is_separator (token))
+    {
+        assert (ku_token_get_separator_value (token) == STAR);
+        mutable = true;
+        ku_token_free (token);
+        token = ku_lexer_read_token_no_spaces (parser->lexer);
+    }
+    assert (ku_token_is_literal (token)); // FIXME: suport built-in types
+    KuType *type = ku_type_new (ku_string_dup (ku_token_get_literal_value (token)), mutable);
+    ku_token_free (token);
+    return type;
+}
+
 static KuStatement *
 parse_let_statement (KuParser *parser)
 {
@@ -46,7 +65,15 @@ parse_let_statement (KuParser *parser)
 
     token = ku_lexer_read_token_no_spaces (parser->lexer);
     assert (ku_token_is_separator (token)); // FIXME: args
-    assert (ku_token_get_separator_value (token) == EQUALS);
+    KuSeparator sep = ku_token_get_separator_value (token);
+    if (sep == COLON) /* Type */
+    {
+        stmt->type = parse_type (parser);
+        token = ku_lexer_read_token_no_spaces (parser->lexer);
+        assert (ku_token_is_separator (token));
+        sep = ku_token_get_separator_value (token);
+    }
+    assert (sep == EQUALS);
     ku_token_free (token);
 
     stmt->rvalue = parse_statement (parser);
@@ -73,6 +100,9 @@ parse_statement (KuParser *parser)
             break;
         case BFALSE:
             stmt = KU_STATEMENT (ku_boolean_statement_new (false));
+            break;
+        case PNULL:
+            stmt = KU_STATEMENT (ku_null_statement_new ());
             break;
         /* Builtins */
         case LET:

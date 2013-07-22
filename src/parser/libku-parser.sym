@@ -6,6 +6,8 @@ global:
     ku_statement_init;
     ku_boolean_statement_new;
     ku_let_statement_new;
+    ku_null_statement_new;
+    ku_type_new;
 local:
     *;
 };

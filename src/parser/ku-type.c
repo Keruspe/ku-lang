@@ -17,19 +17,14 @@
  *      along with ku.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef __KU_LET_STATEMENT_PRIVATE_H__
-#define __KU_LET_STATEMENT_PRIVATE_H__
+#include "ku-type-private.h"
 
-#include "ku-type.h"
-#include "ku-statement-private.h"
-#include "ku-let-statement.h"
-
-struct _KuLetStatement
+KU_VISIBLE KuType *
+ku_type_new (KuString *name,
+             bool      mutable)
 {
-    KuStatement  parent;
-    KuString    *name;
-    KuStatement *rvalue;
-    KuType      *type;
-};
-
-#endif /*__KU_LET_STATEMENT_PRIVATE_H__*/
+    KuType *type = (KuType *) malloc (sizeof (KuType));
+    type->name = name;
+    type->mutable = mutable;
+    return type;
+}

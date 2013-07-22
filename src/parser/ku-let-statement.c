@@ -26,5 +26,6 @@ ku_let_statement_new (void)
     ku_statement_init (KU_STATEMENT (stmt), LET_STMT, false);
     stmt->name = NULL;
     stmt->rvalue = NULL;
+    stmt->type = NULL;
     return stmt;
 }
