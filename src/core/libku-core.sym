@@ -27,6 +27,12 @@ global:
     ku_list_next;
     ku_list_get_data_raw;
     ku_list_free;
+    ku_map_new;
+    ku_string_map_new;
+    ku_map_put;
+    ku_map_get_raw;
+    ku_map_remove;
+    ku_map_free;
 local:
     *;
 };
