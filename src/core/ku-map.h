@@ -38,13 +38,13 @@ void ku_map_put (KuMap *map,
                  void  *key,
                  void  *value);
 
-void *ku_map_get_raw (KuMap       *map,
-                      const void  *key);
+void *ku_map_get_raw (KuMap      *map,
+                      const void *key);
 
 #define ku_map_get(map, key, Type) ((Type) ku_map_get_raw (map, key))
 
-void ku_map_remove (KuMap *map,
-                    void  *key);
+void ku_map_remove (KuMap      *map,
+                    const void *key);
 
 void ku_map_free (KuMap *map);
 

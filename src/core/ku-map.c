@@ -44,7 +44,7 @@ string_hash (const void *str)
     const char *c;
 
     for (c = str; *c; ++c)
-        hash = (hash << 5) + hash + (unsigned int) c;
+        hash = (hash << 5) + hash + (unsigned int) *c;
 
     return hash;
 }
@@ -109,8 +109,8 @@ ku_map_put (KuMap *map,
 }
 
 KU_VISIBLE void *
-ku_map_get_raw (KuMap       *map,
-                const void  *key)
+ku_map_get_raw (KuMap      *map,
+                const void *key)
 {
     assert (map);
     assert (key);
@@ -132,7 +132,7 @@ ku_map_get_raw (KuMap       *map,
 static void
 remove (KuMap       *map,
         unsigned int hash,
-        void        *key)
+        const void  *key)
 {
     KuList *bucket = map->buckets[hash];
     while (bucket)
@@ -147,6 +147,8 @@ remove (KuMap       *map,
                 KuList *next = ku_list_next (bucket);
                 if (prev)
                     prev->next = next;
+                else
+                    map->buckets[hash] = next;
                 if (next)
                     next->prev = prev;
                 free (bucket);
@@ -157,8 +159,8 @@ remove (KuMap       *map,
     }
 }
 KU_VISIBLE void
-ku_map_remove (KuMap *map,
-               void  *key)
+ku_map_remove (KuMap      *map,
+               const void *key)
 {
     assert (map);
     assert (key);
