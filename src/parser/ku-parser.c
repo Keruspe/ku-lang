@@ -68,6 +68,7 @@ parse_let_statement (KuParser *parser)
     KuSeparator sep = ku_token_get_separator_value (token);
     if (sep == COLON) /* Type */
     {
+        ku_token_free (token);
         stmt->type = parse_type (parser);
         token = ku_lexer_read_token_no_spaces (parser->lexer);
         assert (ku_token_is_separator (token));
@@ -89,7 +90,10 @@ parse_statement (KuParser *parser)
     KuToken *t = ku_lexer_read_token_no_spaces (parser->lexer); // FIXME: free
     KuStatement *stmt;
     if (ku_token_is_end_of_file (t))
+    {
+        ku_token_free (t);
         return NULL;
+    }
     else if (ku_token_is_reserved_keyword (t))
     {
         switch (ku_token_get_reserved_keyword_value (t))
@@ -106,6 +110,7 @@ parse_statement (KuParser *parser)
             break;
         /* Builtins */
         case LET:
+            ku_token_free (t);
             return parse_let_statement (parser);
             break;
         default:
@@ -117,6 +122,7 @@ parse_statement (KuParser *parser)
         assert (!"FIXME: not a keyword");
     }
 
+    ku_token_free (t);
     t = ku_lexer_read_token_no_spaces (parser->lexer);
     assert (ku_token_is_separator (t));
     assert (ku_token_get_separator_value (t) == SEMI_COLON);

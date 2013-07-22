@@ -7,29 +7,35 @@
 
 #include <assert.h>
 
-#define EXPECT_BOOLEAN_LET_STATEMENT(x_name, x_value)            \
-    assert (stmt->type == LET_STMT);                             \
-    ls = KU_LET_STATEMENT (stmt);                                \
-    assert (ls->name);                                           \
-    assert (!strcmp (ku_string_get_cstring (ls->name), x_name)); \
-    assert (!ls->type);                                          \
-    assert (ls->rvalue);                                         \
-    assert (ls->rvalue->type == BOOL_STMT);                      \
-    assert (!ls->rvalue->next);                                  \
-    assert (KU_BOOLEAN_STATEMENT (ls->rvalue)->value == x_value)
+#define EXPECT_BOOLEAN_LET_STATEMENT(x_name, x_value)             \
+    assert (stmt->type == LET_STMT);                              \
+    ls = KU_LET_STATEMENT (stmt);                                 \
+    assert (ls->name);                                            \
+    assert (!strcmp (ku_string_get_cstring (ls->name), x_name));  \
+    ku_string_free (ls->name);                                    \
+    assert (!ls->type);                                           \
+    assert (ls->rvalue);                                          \
+    assert (ls->rvalue->type == BOOL_STMT);                       \
+    assert (!ls->rvalue->next);                                   \
+    assert (KU_BOOLEAN_STATEMENT (ls->rvalue)->value == x_value); \
+    free (ls->rvalue);
 
 #define EXPECT_NULL_LET_STATEMENT(x_name, type_name)                      \
     assert (stmt->type == LET_STMT);                                      \
     ls = KU_LET_STATEMENT (stmt);                                         \
     assert (ls->name);                                                    \
     assert (!strcmp (ku_string_get_cstring (ls->name), x_name));          \
+    ku_string_free (ls->name);                                            \
     assert (ls->type);                                                    \
     assert (!strcmp (ku_string_get_cstring (ls->type->name), type_name)); \
+    ku_string_free (ls->type->name);                                      \
     assert (ls->type->mutable);                                           \
+    free (ls->type);                                                      \
     assert (ls->rvalue);                                                  \
     assert (ls->rvalue->type == NULL_STMT);                               \
     assert (!ls->rvalue->next);                                           \
-    assert (!KU_NULL_STATEMENT (ls->rvalue)->value);
+    assert (!KU_NULL_STATEMENT (ls->rvalue)->value);                      \
+    free (ls->rvalue)
 
 static void
 test_let_bool (void)
@@ -39,12 +45,15 @@ test_let_bool (void)
                     "let bar = FALSE;"
                 )));
     KuStatement *stmt = ku_parser_parse (p);
+    KuStatement *first = stmt;
     KuLetStatement *ls;
     EXPECT_BOOLEAN_LET_STATEMENT ("foo", true);
     assert (stmt->next);
     stmt = stmt->next;
+    free (first);
     EXPECT_BOOLEAN_LET_STATEMENT ("bar", false);
     assert (!stmt->next);
+    free (stmt);
     ku_parser_free (p);
     // TODO: check vars index
 }
@@ -57,6 +66,7 @@ test_let_null (void)
     KuLetStatement *ls;
     EXPECT_NULL_LET_STATEMENT ("f", "Foo");
     assert (!stmt->next);
+    free (stmt);
     ku_parser_free (p);
     // TODO: check vars index
 }

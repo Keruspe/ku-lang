@@ -208,7 +208,8 @@ KU_VISIBLE KuToken *
 ku_lexer_read_token_no_spaces (KuLexer *lexer)
 {
     KuToken *token;
-    while ((token = ku_lexer_read_token (lexer)) && token_is_space (token));
+    while ((token = ku_lexer_read_token (lexer)) && token_is_space (token))
+        ku_token_free (token);
     return token;
 }
 

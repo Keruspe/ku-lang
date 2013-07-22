@@ -149,7 +149,7 @@ ku_token_free (KuToken *token)
     {
         if (ku_token_is_string (token))
             ku_string_free (token->value.string);
-        if (ku_token_is_literal (token))
+        else if (ku_token_is_literal (token))
             ku_string_free (token->value.literal);
         free (token);
     }
