@@ -17,6 +17,7 @@
 
 TESTS +=                       \
 	tests/core/test-list   \
+	tests/core/test-map    \
 	tests/core/test-file   \
 	tests/core/test-stream \
 	tests/core/test-string \
@@ -27,6 +28,14 @@ tests_core_test_list_SOURCES = \
 	$(NULL)
 
 tests_core_test_list_LDADD =  \
+	$(libku_core_la_file) \
+	$(NULL)
+
+tests_core_test_map_SOURCES = \
+	tests/core/test-map.c \
+	$(NULL)
+
+tests_core_test_map_LDADD =   \
 	$(libku_core_la_file) \
 	$(NULL)
 
