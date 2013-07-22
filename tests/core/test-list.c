@@ -27,8 +27,20 @@ test_ku_list_full (void)
     ku_list_free (list, free);
 }
 
+static void
+test_ku_list_null_append (void)
+{
+    KuList *list = ku_list_new (NULL);
+    assert (!list);
+    list = ku_list_append (list, (char *)"foo");
+    assert (!ku_list_prev (list));
+    assert (!ku_list_next (list));
+    ku_list_free (list, NULL);
+}
+
 int
 main (int KU_UNUSED argc, char KU_UNUSED *argv[]) {
     test_ku_list_full ();
+    test_ku_list_null_append ();
     return 0;
 }
