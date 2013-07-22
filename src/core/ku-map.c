@@ -151,6 +151,7 @@ remove (KuMap       *map,
                     map->buckets[hash] = next;
                 if (next)
                     next->prev = prev;
+                free (ku_list_get_data_raw (bucket));
                 free (bucket);
                 return;
             }
@@ -172,5 +173,9 @@ KU_VISIBLE void
 ku_map_free (KuMap *map)
 {
     if (map)
+    {
+        for (unsigned int i = 0; i < NB_BUCKETS; ++i)
+            ku_list_free (map->buckets[i], free);
         free (map);
+    }
 }

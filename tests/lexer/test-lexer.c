@@ -35,6 +35,7 @@
 #define END_TEST                              \
     token = ku_lexer_read_token (l);          \
     assert (ku_token_is_end_of_file (token)); \
+    ku_token_free (token);                    \
     ku_lexer_free (l)
 
 
