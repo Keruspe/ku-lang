@@ -8,6 +8,7 @@ global:
     ku_let_statement_new;
     ku_null_statement_new;
     ku_type_new;
+    ku_context_new;
 local:
     *;
 };

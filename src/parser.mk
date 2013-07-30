@@ -22,6 +22,7 @@ LIBKU_PARSER_REVISION=0
 LIBKU_PARSER_AGE=0
 
 libku_parser_public_headers =             \
+	src/parser/ku-context.h           \
 	src/parser/ku-parser.h            \
 	src/parser/ku-type.h              \
 	src/parser/ku-statement.h         \
@@ -31,6 +32,7 @@ libku_parser_public_headers =             \
 	$(NULL)
 
 libku_parser_private_headers =                    \
+	src/parser/ku-context-private.h           \
 	src/parser/ku-parser-private.h            \
 	src/parser/ku-type-private.h              \
 	src/parser/ku-statement-private.h         \
@@ -42,6 +44,7 @@ libku_parser_private_headers =                    \
 src_parser_libku_parser_la_SOURCES =      \
 	$(libku_parser_public_headers)    \
 	$(libku_parser_private_headers)   \
+	src/parser/ku-context.c           \
 	src/parser/ku-parser.c            \
 	src/parser/ku-type.c              \
 	src/parser/ku-statement.c         \
