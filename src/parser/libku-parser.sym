@@ -9,6 +9,7 @@ global:
     ku_null_statement_new;
     ku_type_new;
     ku_context_new;
+    ku_symbol_new_type;
 local:
     *;
 };
