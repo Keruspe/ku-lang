@@ -28,3 +28,9 @@ ku_type_new (KuString *name,
     type->mutable = mutable;
     return type;
 }
+
+KU_VISIBLE const char *
+ku_type_get_name (KuType *type)
+{
+    return (type) ? type->name : NULL;
+}

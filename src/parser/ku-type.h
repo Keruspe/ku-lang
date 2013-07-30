@@ -27,4 +27,6 @@ typedef struct _KuType KuType;
 KuType *ku_type_new (KuString *name,
                      bool      mutable);
 
+const char *ku_type_get_name (KuType *type);
+
 #endif /*__KU_TYPE_H__*/

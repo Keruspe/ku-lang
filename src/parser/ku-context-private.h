@@ -21,11 +21,14 @@
 #define __KU_CONTEXT_PRIVATE_H__
 
 #include "ku-context.h"
+#include "ku-list.h"
+#include "ku-map.h"
 
 struct _KuContext
 {
     KuContext *parent;
     KuMap     *symbols;
+    KuList    *types;
 };
 
 #endif /*__KU_CONTEXT_PRIVATE_H__*/

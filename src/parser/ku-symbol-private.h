@@ -24,7 +24,7 @@
 
 typedef enum
 {
-    FUNCTION
+    FUNCTION,
     TYPE,
     VARIABLE
 } KuSymbolType;

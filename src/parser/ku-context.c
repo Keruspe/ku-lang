@@ -27,5 +27,17 @@ ku_context_new (KuContext *parent)
     KuContext *context = (KuContext *) malloc (sizeof (KuContext));
     context->parent = parent;
     context->symbols = ku_string_map_new ();
+    context->types = ku_list_new (NULL);
     return context;
+}
+
+KU_VISIBLE void
+ku_context_register_type (KuContext *context,
+                          KuType    *type)
+{
+    if (context && type)
+    {
+        ku_map_put (context->symbols, (char *)ku_type_get_name (type), type);
+        context->types = ku_list_prepend (context->types, type);
+    }
 }

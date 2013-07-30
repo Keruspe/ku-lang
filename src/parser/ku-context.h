@@ -20,10 +20,13 @@
 #ifndef __KU_CONTEXT_H__
 #define __KU_CONTEXT_H__
 
-#include "ku-map.h"
+#include "ku-type.h"
 
 typedef struct _KuContext KuContext;
 
 KuContext *ku_context_new (KuContext *parent);
+
+void ku_context_register_type (KuContext *context,
+                               KuType    *type);
 
 #endif /*__KU_CONTEXT_H__*/
