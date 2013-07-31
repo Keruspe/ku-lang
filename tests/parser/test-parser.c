@@ -6,7 +6,7 @@
 
 #include <assert.h>
 
-#define EXPECT_VARIABLE(x_name, x_type, x_mutable)                                                     \
+#define EXPECT_VARIABLE(x_name, x_type, x_mutable, val_type, val)                                      \
     tmp = ku_string_new (x_name);                                                                      \
     sym = ku_context_get (p->current_ctx, tmp);                                                        \
     ku_string_free (tmp);                                                                              \
@@ -21,7 +21,8 @@
     }                                                                                                  \
     else                                                                                               \
         assert (!var->type);                                                                           \
-    assert (x_mutable == var->mutable);
+    assert (x_mutable == var->mutable);                                                                \
+    assert (val == var->value.val_type)
 
 static void
 test_let_bool (void)
@@ -35,9 +36,9 @@ test_let_bool (void)
     const KuSymbol *sym;
     const KuVariable *var;
     KuString *tmp;
-    // TODO: type, value
-    EXPECT_VARIABLE ("foo", "", false);
-    EXPECT_VARIABLE ("bar", "", false);
+    // TODO: type
+    EXPECT_VARIABLE ("foo", "", false, boolean, true);
+    EXPECT_VARIABLE ("bar", "", false, boolean, false);
     ku_parser_free (p);
 }
 
@@ -50,8 +51,7 @@ test_let_null (void)
     const KuSymbol *sym;
     const KuVariable *var;
     KuString *tmp;
-    // TODO: value
-    EXPECT_VARIABLE ("f", "Foo", true);
+    EXPECT_VARIABLE ("f", "Foo", true, null_pointer, NULL);
     ku_parser_free (p);
 }
 
