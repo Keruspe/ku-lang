@@ -18,7 +18,7 @@
  */
 
 #include "ku-context-private.h"
-#include "ku-symbol.h"
+#include "ku-symbol-private.h"
 
 #include <stdlib.h>
 
@@ -30,6 +30,15 @@ ku_context_new (KuContext *parent)
     context->symbols = ku_string_map_new ();
     context->types = ku_list_new (NULL);
     return context;
+}
+
+KU_VISIBLE const KuSymbol *
+ku_context_get (KuContext  *context,
+                const char *name)
+{
+    if (!context || !name)
+        return NULL;
+    return ku_map_get (context->symbols, name, KuSymbol *);
 }
 
 KU_VISIBLE void

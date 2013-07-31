@@ -20,11 +20,15 @@
 #ifndef __KU_CONTEXT_H__
 #define __KU_CONTEXT_H__
 
+#include "ku-symbol.h"
 #include "ku-variable.h"
 
 typedef struct _KuContext KuContext;
 
 KuContext *ku_context_new (KuContext *parent);
+
+const KuSymbol *ku_context_get (KuContext  *context,
+                                const char *name); // FIXME: make me a KuString
 
 void ku_context_register_type (KuContext *context,
                                KuType    *type);
