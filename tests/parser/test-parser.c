@@ -10,7 +10,9 @@
 #include <assert.h>
 
 #define EXPECT_VARIABLE(x_name, x_type, x_mutable)                                                     \
-    sym = ku_context_get (p->current_ctx, x_name);                                                     \
+    tmp = ku_string_new (x_name);                                                                      \
+    sym = ku_context_get (p->current_ctx, tmp);                                                        \
+    ku_string_free (tmp);                                                                              \
     assert (sym);                                                                                      \
     assert (!strcmp (x_name, ku_string_get_cstring (ku_symbol_get_name (sym))));                       \
     assert (sym->type == VARIABLE);                                                                    \
@@ -64,6 +66,7 @@ test_let_bool (void)
     KuLetStatement *ls;
     const KuSymbol *sym;
     const KuVariable *var;
+    KuString *tmp;
     EXPECT_BOOLEAN_LET_STATEMENT ("foo", true);
     assert (stmt->next);
     stmt = stmt->next;

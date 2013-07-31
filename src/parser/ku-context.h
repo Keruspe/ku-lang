@@ -27,8 +27,8 @@ typedef struct _KuContext KuContext;
 
 KuContext *ku_context_new (KuContext *parent);
 
-const KuSymbol *ku_context_get (KuContext  *context,
-                                const char *name); // FIXME: make me a KuString
+const KuSymbol *ku_context_get (const KuContext *context,
+                                const KuString  *name);
 
 void ku_context_register_type (KuContext *context,
                                KuType    *type);

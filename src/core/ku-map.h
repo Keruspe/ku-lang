@@ -41,7 +41,7 @@ void ku_map_put (KuMap *map,
 void *ku_map_get_raw (KuMap      *map,
                       const void *key);
 
-#define ku_map_get(map, key, Type) ((Type) ku_map_get_raw (map, key))
+#define ku_map_get(map, key, Type) ((Type *) ku_map_get_raw (map, key))
 
 void ku_map_remove (KuMap      *map,
                     const void *key);

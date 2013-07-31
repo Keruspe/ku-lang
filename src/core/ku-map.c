@@ -20,6 +20,8 @@
 #include "ku-map-private.h"
 #include "ku-list-private.h" // FIXME: remove me
 
+#include "ku-string.h"
+
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
@@ -37,8 +39,10 @@ ku_map_new (KuMapKeyHashFn    hash_fn,
 }
 
 static unsigned int
-string_hash (const void *str)
+string_hash (const void *data)
 {
+    const char *str = ku_string_get_cstring ((const KuString *) data);
+
     /* DJB's hash func */
     unsigned int hash = 5381;
     const char *c;
@@ -53,7 +57,7 @@ static int
 string_compare (const void *s1,
                 const void *s2)
 {
-    return strcmp ((const char *) s1, (const char *) s2);
+    return !ku_string_equals ((const KuString *) s1, (const KuString *) s2);
 }
 
 KU_VISIBLE KuMap *

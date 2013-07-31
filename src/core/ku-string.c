@@ -67,6 +67,17 @@ ku_string_get_length (const KuString *string)
     return (string) ? string->length : 0;
 }
 
+KU_VISIBLE bool
+ku_string_equals (const KuString *str1,
+                  const KuString *str2)
+{
+    if (str1 == str2)
+        return true;
+    if (!str1 || !str2)
+        return false;
+    return str1->length == str2->length && !strcmp (str1->string, str2->string);
+}
+
 KU_VISIBLE KuString *
 ku_string_dup (const KuString *string)
 {

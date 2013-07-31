@@ -34,12 +34,12 @@ ku_context_new (KuContext *parent)
 }
 
 KU_VISIBLE const KuSymbol *
-ku_context_get (KuContext  *context,
-                const char *name)
+ku_context_get (const KuContext *context,
+                const KuString  *name)
 {
     if (!context || !name)
         return NULL;
-    return ku_map_get (context->symbols, name, KuSymbol *);
+    return ku_map_get (context->symbols, name, KuSymbol);
 }
 
 KU_VISIBLE void
@@ -48,7 +48,7 @@ ku_context_register_type (KuContext *context,
 {
     if (context && type)
     {
-        ku_map_put (context->symbols, (char *)ku_string_get_cstring (ku_symbol_get_name (KU_SYMBOL (type))), type);
+        ku_map_put (context->symbols, (void *)ku_symbol_get_name (KU_SYMBOL (type)), type);
         context->types = ku_list_prepend (context->types, type);
     }
 }
@@ -59,7 +59,7 @@ ku_context_register_variable (KuContext  *context,
 {
     if (context && variable)
     {
-        ku_map_put (context->symbols, (char *)ku_string_get_cstring (ku_symbol_get_name (KU_SYMBOL (variable))), variable);
+        ku_map_put (context->symbols, (void *)ku_symbol_get_name (KU_SYMBOL (variable)), variable);
         context->vars = ku_list_prepend (context->vars, variable);
     }
 }
