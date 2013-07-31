@@ -21,10 +21,12 @@
 #define __KU_PARSER_PRIVATE_H__
 
 #include "ku-parser.h"
+#include "ku-context.h"
 
 struct _KuParser
 {
-    KuLexer *lexer;
+    KuLexer   *lexer;
+    KuContext *current_ctx;
 };
 
 #endif /*__KU_PARSER_PRIVATE_H__*/
