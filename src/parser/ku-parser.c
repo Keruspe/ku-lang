@@ -20,7 +20,6 @@
 #include "ku-parser-private.h"
 
 #include "ku-statement-private.h"
-#include "ku-null-statement.h"
 
 #include <assert.h>
 
@@ -101,7 +100,7 @@ parse_statement (KuParser *parser)
             stmt = KU_NOOP_STATEMENT; //FIXME
             break;
         case PNULL:
-            stmt = KU_STATEMENT (ku_null_statement_new ());
+            stmt = KU_NOOP_STATEMENT; //FIXME
             break;
         /* Builtins */
         case LET:

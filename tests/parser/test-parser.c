@@ -1,6 +1,5 @@
 #include "ku-parser-private.h"
 
-#include "ku-null-statement-private.h"
 #include "ku-type-private.h"
 #include "ku-variable-private.h"
 #include "ku-context.h"
@@ -24,33 +23,6 @@
         assert (!var->type);                                                                           \
     assert (x_mutable == var->mutable);
 
-#define EXPECT_BOOLEAN_LET_STATEMENT(x_name, x_value)             \
-    assert (stmt == KU_NOOP_STATEMENT);                           \
-    ls = KU_LET_STATEMENT (stmt);                                 \
-    assert (ls->name);                                            \
-    assert (!strcmp (ku_string_get_cstring (ls->name), x_name));  \
-    ku_string_free (ls->name);                                    \
-    assert (!ls->type);                                           \
-    assert (ls->rvalue);                                          \
-    assert (ls->rvalue->type == BOOL_STMT);                       \
-    assert (!ls->rvalue->next);                                   \
-    assert (KU_BOOLEAN_STATEMENT (ls->rvalue)->value == x_value); \
-    free (ls->rvalue);
-
-#define EXPECT_NULL_LET_STATEMENT(x_name, type_name)                      \
-    assert (stmt == KU_NOOP_STATEMENT);                                   \
-    ls = KU_LET_STATEMENT (stmt);                                         \
-    assert (ls->name);                                                    \
-    assert (!strcmp (ku_string_get_cstring (ls->name), x_name));          \
-    ku_string_free (ls->name);                                            \
-    assert (ls->type);                                                    \
-    free (ls->type);                                                      \
-    assert (ls->rvalue);                                                  \
-    assert (ls->rvalue->type == NULL_STMT);                               \
-    assert (!ls->rvalue->next);                                           \
-    assert (!KU_NULL_STATEMENT (ls->rvalue)->value);                      \
-    free (ls->rvalue)
-
 static void
 test_let_bool (void)
 {
@@ -72,15 +44,15 @@ test_let_bool (void)
 static void
 test_let_null (void)
 {
-#if 0
     KuParser *p = ku_parser_new (ku_stream_new_from_string (ku_string_new ("let f : *Foo = NULL;")));
     KuStatement *stmt = ku_parser_parse (p);
-    KuLetStatement *ls;
-    EXPECT_NULL_LET_STATEMENT ("f", "Foo");
-    assert (!stmt->next);
-    free (stmt);
+    assert (stmt == KU_NOOP_STATEMENT);
+    const KuSymbol *sym;
+    const KuVariable *var;
+    KuString *tmp;
+    // TODO: value
+    EXPECT_VARIABLE ("f", "Foo", true);
     ku_parser_free (p);
-#endif
 }
 
 static void
