@@ -42,3 +42,14 @@ ku_context_register_type (KuContext *context,
         context->types = ku_list_prepend (context->types, type);
     }
 }
+
+KU_VISIBLE void
+ku_context_register_variable (KuContext  *context,
+                              KuVariable *variable)
+{
+    if (context && variable)
+    {
+        ku_map_put (context->symbols, (char *)ku_string_get_cstring (ku_symbol_get_name (KU_SYMBOL (variable))), variable);
+        context->vars = ku_list_prepend (context->vars, variable);
+    }
+}

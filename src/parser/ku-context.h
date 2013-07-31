@@ -20,7 +20,7 @@
 #ifndef __KU_CONTEXT_H__
 #define __KU_CONTEXT_H__
 
-#include "ku-type.h"
+#include "ku-variable.h"
 
 typedef struct _KuContext KuContext;
 
@@ -28,5 +28,7 @@ KuContext *ku_context_new (KuContext *parent);
 
 void ku_context_register_type (KuContext *context,
                                KuType    *type);
+void ku_context_register_variable (KuContext  *context,
+                                   KuVariable *variable);
 
 #endif /*__KU_CONTEXT_H__*/

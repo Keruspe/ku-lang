@@ -29,6 +29,7 @@ struct _KuContext
     KuContext *parent;
     KuMap     *symbols;
     KuList    *types;
+    KuList    *vars;
 };
 
 #endif /*__KU_CONTEXT_PRIVATE_H__*/

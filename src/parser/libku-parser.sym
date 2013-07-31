@@ -10,6 +10,7 @@ global:
     ku_type_new;
     ku_context_new;
     ku_context_register_type;
+    ku_context_register_variable;
     ku_symbol_new;
     ku_symbol_get_name;
     ku_variable_new;
