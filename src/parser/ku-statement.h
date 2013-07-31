@@ -33,8 +33,6 @@ typedef struct _KuStatement KuStatement;
 
 typedef enum
 {
-    BOOL_STMT,
-    LET_STMT,
     NULL_STMT
 } KuStatementType;
 

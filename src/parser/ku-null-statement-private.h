@@ -26,7 +26,6 @@
 struct _KuNullStatement
 {
     KuStatement     parent;
-    void           *value;
 };
 
 #endif /*__KU_NULL_STATEMENT_PRIVATE_H__*/

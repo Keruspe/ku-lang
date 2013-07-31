@@ -23,7 +23,6 @@ KU_VISIBLE KuNullStatement *
 ku_null_statement_new (void)
 {
     KuNullStatement *stmt = (KuNullStatement *) malloc (sizeof (KuNullStatement));
-    ku_statement_init (KU_STATEMENT (stmt), NULL_STMT, true);
-    stmt->value = NULL;
+    ku_statement_init (KU_STATEMENT (stmt), NULL_STMT, false);
     return stmt;
 }
