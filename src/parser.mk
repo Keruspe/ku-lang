@@ -27,6 +27,7 @@ libku_parser_public_headers =             \
 	src/parser/ku-type.h              \
 	src/parser/ku-statement.h         \
 	src/parser/ku-symbol.h            \
+	src/parser/ku-variable.h          \
 	src/parser/ku-boolean-statement.h \
 	src/parser/ku-let-statement.h     \
 	src/parser/ku-null-statement.h    \
@@ -38,6 +39,7 @@ libku_parser_private_headers =                    \
 	src/parser/ku-type-private.h              \
 	src/parser/ku-statement-private.h         \
 	src/parser/ku-symbol-private.h            \
+	src/parser/ku-variable-private.h          \
 	src/parser/ku-boolean-statement-private.h \
 	src/parser/ku-let-statement-private.h     \
 	src/parser/ku-null-statement-private.h    \
@@ -51,6 +53,7 @@ src_parser_libku_parser_la_SOURCES =      \
 	src/parser/ku-type.c              \
 	src/parser/ku-statement.c         \
 	src/parser/ku-symbol.c            \
+	src/parser/ku-variable.c          \
 	src/parser/ku-boolean-statement.c \
 	src/parser/ku-let-statement.c     \
 	src/parser/ku-null-statement.c    \

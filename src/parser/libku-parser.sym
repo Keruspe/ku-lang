@@ -12,6 +12,7 @@ global:
     ku_context_register_type;
     ku_symbol_new;
     ku_symbol_get_name;
+    ku_variable_new;
 local:
     *;
 };
