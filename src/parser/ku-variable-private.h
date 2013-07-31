@@ -28,6 +28,11 @@ struct _KuVariable
     KuSymbol parent;
     KuType  *type;
     bool     mutable;
+    union
+    {
+        bool  boolean;
+        void *null_pointer;
+    } value;
 };
 
 #endif /*__KU_VARIABLE_PRIVATE_H__*/

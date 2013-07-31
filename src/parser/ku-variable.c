@@ -27,5 +27,6 @@ ku_variable_new (KuType   *type,
     KuVariable *variable = KU_VARIABLE (ku_symbol_new (sizeof (KuVariable), VARIABLE, name));
     variable->type = type;
     variable->mutable = mutable;
+    variable->value.null_pointer = NULL;
     return variable;
 }

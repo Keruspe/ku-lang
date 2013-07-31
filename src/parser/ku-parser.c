@@ -20,6 +20,7 @@
 #include "ku-parser-private.h"
 
 #include "ku-statement-private.h"
+#include "ku-variable-private.h"
 
 #include <assert.h>
 
@@ -32,6 +33,34 @@ ku_parser_new (KuStream *stream)
     parser->lexer = ku_lexer_new (stream);
     parser->current_ctx = ku_context_new (NULL);
     return parser;
+}
+
+static bool
+parse_rvalue (KuParser   *parser,
+              KuVariable *var)
+{
+    KuToken *t = ku_lexer_read_token_no_spaces (parser->lexer); // FIXME: free
+    if (ku_token_is_reserved_keyword (t))
+    {
+        switch (ku_token_get_reserved_keyword_value (t))
+        {
+            case BFALSE:
+                // TODO: assert type is bool
+                var->value.boolean = false;
+                return true;;
+            case BTRUE:
+                // TODO: assert type is bool
+                var->value.boolean = true;
+                return true;;
+            case PNULL:
+                // TODO: assert type is mutable
+                var->value.null_pointer = NULL;
+                return true;;
+            default:
+                assert (!"other rval");
+        }
+    }
+    return false;
 }
 
 static KuStatement *
@@ -68,14 +97,16 @@ parse_let_statement (KuParser *parser)
     assert (sep == EQUALS);
     ku_token_free (token);
 
-    // TODO: rework this
-    // stmt->rvalue = parse_statement (parser);
-    // assert (stmt->rvalue);
-    //assert (stmt->rvalue->valuable); // FIXME: more asserts ?
+    KuVariable *var = ku_variable_new (type, name, mutable);
 
-    ku_context_register_variable (parser->current_ctx, ku_variable_new (type, name, mutable)); // TODO: handle value
+    assert (parse_rvalue (parser, var));
+    ku_context_register_variable (parser->current_ctx, var);
 
-    return KU_NOOP_STATEMENT; // TODO: ignore ?
+    token = ku_lexer_read_token_no_spaces (parser->lexer);
+    assert (ku_token_is_separator (token) && ku_token_get_separator_value (token) == SEMI_COLON);
+    ku_token_free (token);
+
+    return KU_NOOP_STATEMENT;
 }
 
 static KuStatement *
@@ -92,17 +123,6 @@ parse_statement (KuParser *parser)
     {
         switch (ku_token_get_reserved_keyword_value (t))
         {
-        /* Values */
-        case BTRUE:
-            stmt = KU_NOOP_STATEMENT; //FIXME
-            break;
-        case BFALSE:
-            stmt = KU_NOOP_STATEMENT; //FIXME
-            break;
-        case PNULL:
-            stmt = KU_NOOP_STATEMENT; //FIXME
-            break;
-        /* Builtins */
         case LET:
             ku_token_free (t);
             return parse_let_statement (parser);
