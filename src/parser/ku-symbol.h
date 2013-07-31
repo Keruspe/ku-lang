@@ -37,6 +37,6 @@ KuSymbol *ku_symbol_new (size_t       size,
                          KuSymbolType type,
                          KuString    *name);
 
-const KuString *ku_symbol_get_name (KuSymbol *symbol);
+const KuString *ku_symbol_get_name (const KuSymbol *symbol);
 
 #endif /*__KU_SYMBOL_H__*/

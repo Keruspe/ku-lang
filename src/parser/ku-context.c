@@ -29,6 +29,7 @@ ku_context_new (KuContext *parent)
     context->parent = parent;
     context->symbols = ku_string_map_new ();
     context->types = ku_list_new (NULL);
+    context->vars = ku_list_new (NULL);
     return context;
 }
 

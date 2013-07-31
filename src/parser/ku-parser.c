@@ -49,11 +49,12 @@ parse_let_statement (KuParser *parser)
     token = ku_lexer_read_token_no_spaces (parser->lexer);
     assert (ku_token_is_separator (token)); // FIXME: args
     KuSeparator sep = ku_token_get_separator_value (token);
+    bool mutable = false;
+    KuType *type = NULL;
     if (sep == COLON) /* Type */
     {
         ku_token_free (token);
         token = ku_lexer_read_token_no_spaces (parser->lexer);
-        bool mutable = false;
         if (ku_token_is_separator (token))
         {
             assert (ku_token_get_separator_value (token) == STAR);
@@ -62,10 +63,9 @@ parse_let_statement (KuParser *parser)
             token = ku_lexer_read_token_no_spaces (parser->lexer);
         }
         assert (ku_token_is_literal (token)); // FIXME: suport built-in types
-        KuType *type = ku_type_new (ku_string_dup (ku_token_get_literal_value (token)));
+        type = ku_type_new (ku_string_dup (ku_token_get_literal_value (token)));
         ku_token_free (token);
         stmt->type = type;
-        ku_context_register_variable (parser->current_ctx, ku_variable_new (type, stmt->name, mutable)); // TODO: handle value
         token = ku_lexer_read_token_no_spaces (parser->lexer);
         assert (ku_token_is_separator (token));
         sep = ku_token_get_separator_value (token);
@@ -76,6 +76,8 @@ parse_let_statement (KuParser *parser)
     stmt->rvalue = parse_statement (parser);
     assert (stmt->rvalue);
     assert (stmt->rvalue->valuable); // FIXME: more asserts ?
+
+    ku_context_register_variable (parser->current_ctx, ku_variable_new (type, stmt->name, mutable)); // TODO: handle value
 
     return KU_STATEMENT (stmt);
 }

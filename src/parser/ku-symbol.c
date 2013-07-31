@@ -20,7 +20,7 @@
 #include "ku-symbol-private.h"
 
 KU_VISIBLE const KuString *
-ku_symbol_get_name (KuSymbol *symbol)
+ku_symbol_get_name (const KuSymbol *symbol)
 {
     return symbol->name;
 }

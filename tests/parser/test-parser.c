@@ -1,15 +1,33 @@
-#include "ku-parser.h"
+#include "ku-parser-private.h"
 
 #include "ku-boolean-statement-private.h"
 #include "ku-null-statement-private.h"
 #include "ku-let-statement-private.h"
 #include "ku-type-private.h"
+#include "ku-variable-private.h"
+#include "ku-context.h"
 
 #include <assert.h>
+
+#define EXPECT_VARIABLE(x_name, x_type, x_mutable)                                                     \
+    sym = ku_context_get (p->current_ctx, x_name);                                                     \
+    assert (sym);                                                                                      \
+    assert (!strcmp (x_name, ku_string_get_cstring (ku_symbol_get_name (sym))));                       \
+    assert (sym->type == VARIABLE);                                                                    \
+    var = (const KuVariable *) sym;                                                                    \
+    if (x_type[0])                                                                                     \
+    {                                                                                                  \
+        assert (var->type);                                                                            \
+        assert (!strcmp (x_type, ku_string_get_cstring (ku_symbol_get_name (KU_SYMBOL (var->type))))); \
+    }                                                                                                  \
+    else                                                                                               \
+        assert (!var->type);                                                                           \
+    assert (x_mutable == var->mutable);
 
 #define EXPECT_BOOLEAN_LET_STATEMENT(x_name, x_value)             \
     assert (stmt->type == LET_STMT);                              \
     ls = KU_LET_STATEMENT (stmt);                                 \
+    EXPECT_VARIABLE (x_name, "", false);                          \
     assert (ls->name);                                            \
     assert (!strcmp (ku_string_get_cstring (ls->name), x_name));  \
     ku_string_free (ls->name);                                    \
@@ -27,9 +45,6 @@
     assert (!strcmp (ku_string_get_cstring (ls->name), x_name));          \
     ku_string_free (ls->name);                                            \
     assert (ls->type);                                                    \
-    assert (!strcmp (ku_string_get_cstring (ls->type->name), type_name)); \
-    ku_string_free (ls->type->name);                                      \
-    assert (ls->type->mutable);                                           \
     free (ls->type);                                                      \
     assert (ls->rvalue);                                                  \
     assert (ls->rvalue->type == NULL_STMT);                               \
@@ -47,6 +62,8 @@ test_let_bool (void)
     KuStatement *stmt = ku_parser_parse (p);
     KuStatement *first = stmt;
     KuLetStatement *ls;
+    const KuSymbol *sym;
+    const KuVariable *var;
     EXPECT_BOOLEAN_LET_STATEMENT ("foo", true);
     assert (stmt->next);
     stmt = stmt->next;
@@ -55,7 +72,6 @@ test_let_bool (void)
     assert (!stmt->next);
     free (stmt);
     ku_parser_free (p);
-    // TODO: check vars index
 }
 
 static void
