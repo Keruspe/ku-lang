@@ -19,9 +19,8 @@
 
 #include "ku-parser-private.h"
 
-#include "ku-boolean-statement.h"
+#include "ku-statement-private.h"
 #include "ku-null-statement.h"
-#include "ku-let-statement-private.h"
 
 #include <assert.h>
 
@@ -39,11 +38,9 @@ ku_parser_new (KuStream *stream)
 static KuStatement *
 parse_let_statement (KuParser *parser)
 {
-    KuLetStatement *stmt = ku_let_statement_new (); /* TODO: useful ? */
-
     KuToken *token = ku_lexer_read_token_no_spaces (parser->lexer);
     assert (ku_token_is_literal (token));
-    stmt->name = ku_string_dup (ku_token_get_literal_value (token));
+    KuString *name = ku_string_dup (ku_token_get_literal_value (token));
     ku_token_free (token);
 
     token = ku_lexer_read_token_no_spaces (parser->lexer);
@@ -65,7 +62,6 @@ parse_let_statement (KuParser *parser)
         assert (ku_token_is_literal (token)); // FIXME: suport built-in types
         type = ku_type_new (ku_string_dup (ku_token_get_literal_value (token)));
         ku_token_free (token);
-        stmt->type = type;
         token = ku_lexer_read_token_no_spaces (parser->lexer);
         assert (ku_token_is_separator (token));
         sep = ku_token_get_separator_value (token);
@@ -73,13 +69,14 @@ parse_let_statement (KuParser *parser)
     assert (sep == EQUALS);
     ku_token_free (token);
 
-    stmt->rvalue = parse_statement (parser);
-    assert (stmt->rvalue);
-    assert (stmt->rvalue->valuable); // FIXME: more asserts ?
+    // TODO: rework this
+    // stmt->rvalue = parse_statement (parser);
+    // assert (stmt->rvalue);
+    //assert (stmt->rvalue->valuable); // FIXME: more asserts ?
 
-    ku_context_register_variable (parser->current_ctx, ku_variable_new (type, stmt->name, mutable)); // TODO: handle value
+    ku_context_register_variable (parser->current_ctx, ku_variable_new (type, name, mutable)); // TODO: handle value
 
-    return KU_STATEMENT (stmt);
+    return KU_NOOP_STATEMENT; // TODO: ignore ?
 }
 
 static KuStatement *
@@ -98,10 +95,10 @@ parse_statement (KuParser *parser)
         {
         /* Values */
         case BTRUE:
-            stmt = KU_STATEMENT (ku_boolean_statement_new (true));
+            stmt = KU_NOOP_STATEMENT; //FIXME
             break;
         case BFALSE:
-            stmt = KU_STATEMENT (ku_boolean_statement_new (false));
+            stmt = KU_NOOP_STATEMENT; //FIXME
             break;
         case PNULL:
             stmt = KU_STATEMENT (ku_null_statement_new ());
@@ -135,6 +132,8 @@ parse_statements (KuParser *parser)
     KuStatement *first = NULL, *prev = NULL, *stmt;
     while ((stmt = parse_statement (parser)))
     {
+        if (stmt == KU_NOOP_STATEMENT)
+            continue;
         if (!first)
             prev = first = stmt;
         else
@@ -143,7 +142,7 @@ parse_statements (KuParser *parser)
             prev = stmt;
         }
     }
-    return first;
+    return (first) ? first : KU_NOOP_STATEMENT;
 }
 
 KU_VISIBLE KuStatement *

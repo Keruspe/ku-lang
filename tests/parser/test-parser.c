@@ -1,8 +1,6 @@
 #include "ku-parser-private.h"
 
-#include "ku-boolean-statement-private.h"
 #include "ku-null-statement-private.h"
-#include "ku-let-statement-private.h"
 #include "ku-type-private.h"
 #include "ku-variable-private.h"
 #include "ku-context.h"
@@ -27,9 +25,8 @@
     assert (x_mutable == var->mutable);
 
 #define EXPECT_BOOLEAN_LET_STATEMENT(x_name, x_value)             \
-    assert (stmt->type == LET_STMT);                              \
+    assert (stmt == KU_NOOP_STATEMENT);                           \
     ls = KU_LET_STATEMENT (stmt);                                 \
-    EXPECT_VARIABLE (x_name, "", false);                          \
     assert (ls->name);                                            \
     assert (!strcmp (ku_string_get_cstring (ls->name), x_name));  \
     ku_string_free (ls->name);                                    \
@@ -41,7 +38,7 @@
     free (ls->rvalue);
 
 #define EXPECT_NULL_LET_STATEMENT(x_name, type_name)                      \
-    assert (stmt->type == LET_STMT);                                      \
+    assert (stmt == KU_NOOP_STATEMENT);                                   \
     ls = KU_LET_STATEMENT (stmt);                                         \
     assert (ls->name);                                                    \
     assert (!strcmp (ku_string_get_cstring (ls->name), x_name));          \
@@ -62,24 +59,20 @@ test_let_bool (void)
                     "let bar = FALSE;"
                 )));
     KuStatement *stmt = ku_parser_parse (p);
-    KuStatement *first = stmt;
-    KuLetStatement *ls;
+    assert (stmt == KU_NOOP_STATEMENT);
     const KuSymbol *sym;
     const KuVariable *var;
     KuString *tmp;
-    EXPECT_BOOLEAN_LET_STATEMENT ("foo", true);
-    assert (stmt->next);
-    stmt = stmt->next;
-    free (first);
-    EXPECT_BOOLEAN_LET_STATEMENT ("bar", false);
-    assert (!stmt->next);
-    free (stmt);
+    // TODO: type, value
+    EXPECT_VARIABLE ("foo", "", false);
+    EXPECT_VARIABLE ("bar", "", false);
     ku_parser_free (p);
 }
 
 static void
 test_let_null (void)
 {
+#if 0
     KuParser *p = ku_parser_new (ku_stream_new_from_string (ku_string_new ("let f : *Foo = NULL;")));
     KuStatement *stmt = ku_parser_parse (p);
     KuLetStatement *ls;
@@ -87,7 +80,7 @@ test_let_null (void)
     assert (!stmt->next);
     free (stmt);
     ku_parser_free (p);
-    // TODO: check vars index
+#endif
 }
 
 static void

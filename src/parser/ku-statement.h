@@ -28,6 +28,7 @@
 #include <stdlib.h>
 
 #define KU_STATEMENT(x) ((KuStatement *) x)
+#define KU_NOOP_STATEMENT ((KuStatement *) -1)
 
 typedef struct _KuStatement KuStatement;
 
