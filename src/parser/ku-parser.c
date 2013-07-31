@@ -53,11 +53,11 @@ parse_rvalue (KuParser   *parser,
                 var->value.boolean = true;
                 return true;;
             case PNULL:
-                // TODO: assert type is mutable
+                assert (var->mutable);
                 var->value.null_pointer = NULL;
                 return true;;
             default:
-                assert (!"other rval");
+                assert (!"FIXME: other rval");
         }
     }
     return false;
