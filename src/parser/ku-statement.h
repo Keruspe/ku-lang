@@ -34,7 +34,7 @@ typedef struct _KuStatement KuStatement;
 
 typedef enum
 {
-    NULL_STMT
+    NOOP_STMT
 } KuStatementType;
 
 void ku_statement_init (KuStatement    *stmt,

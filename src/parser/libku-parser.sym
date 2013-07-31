@@ -4,7 +4,6 @@ global:
     ku_parser_parse;
     ku_parser_free;
     ku_statement_init;
-    ku_null_statement_new;
     ku_type_new;
     ku_context_new;
     ku_context_get;
