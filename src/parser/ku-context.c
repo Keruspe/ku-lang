@@ -18,6 +18,7 @@
  */
 
 #include "ku-context-private.h"
+#include "ku-symbol.h"
 
 #include <stdlib.h>
 
@@ -37,7 +38,7 @@ ku_context_register_type (KuContext *context,
 {
     if (context && type)
     {
-        ku_map_put (context->symbols, (char *)ku_type_get_name (type), type);
+        ku_map_put (context->symbols, (char *)ku_string_get_cstring (ku_symbol_get_name (KU_SYMBOL (type))), type);
         context->types = ku_list_prepend (context->types, type);
     }
 }

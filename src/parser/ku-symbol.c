@@ -19,18 +19,19 @@
 
 #include "ku-symbol-private.h"
 
-static KuSymbol *
-_ku_symbol_new (KuSymbolType type)
+KU_VISIBLE const KuString *
+ku_symbol_get_name (KuSymbol *symbol)
 {
-    KuSymbol *symbol = (KuSymbol *) malloc (sizeof (KuSymbol));
-    symbol->type = type;
-    return symbol;
+    return symbol->name;
 }
 
 KU_VISIBLE KuSymbol *
-ku_symbol_new_type (KuType *type)
+ku_symbol_new (size_t       size,
+               KuSymbolType type,
+               KuString    *name)
 {
-    KuSymbol *symbol = _ku_symbol_new (TYPE);
-    symbol->value.type = type;
+    KuSymbol *symbol = (KuSymbol *) malloc (size);
+    symbol->type = type;
+    symbol->name = name;
     return symbol;
 }

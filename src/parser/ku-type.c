@@ -20,17 +20,7 @@
 #include "ku-type-private.h"
 
 KU_VISIBLE KuType *
-ku_type_new (KuString *name,
-             bool      mutable)
+ku_type_new (KuString *name)
 {
-    KuType *type = (KuType *) malloc (sizeof (KuType));
-    type->name = name;
-    type->mutable = mutable;
-    return type;
-}
-
-KU_VISIBLE const char *
-ku_type_get_name (KuType *type)
-{
-    return (type) ? type->name : NULL;
+    return KU_TYPE (ku_symbol_new (sizeof (KuType), TYPE, name));
 }

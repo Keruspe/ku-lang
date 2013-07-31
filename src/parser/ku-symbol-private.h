@@ -22,19 +22,10 @@
 
 #include "ku-symbol.h"
 
-typedef enum
-{
-    FUNCTION,
-    TYPE,
-    VARIABLE
-} KuSymbolType;
-
 struct _KuSymbol
 {
     KuSymbolType type;
-    union
-    {   KuType *type;
-    } value;
+    KuString    *name;
 };
 
 #endif /*__KU_SYMBOL_PRIVATE_H__*/

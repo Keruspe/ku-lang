@@ -21,11 +21,11 @@
 #define __KU_TYPE_PRIVATE_H__
 
 #include "ku-type.h"
+#include "ku-symbol-private.h"
 
 struct _KuType
 {
-    KuString *name;
-    bool      mutable;
+    KuSymbol parent;
 };
 
 #endif /*__KU_TYPE_PRIVATE_H__*/

@@ -8,10 +8,10 @@ global:
     ku_let_statement_new;
     ku_null_statement_new;
     ku_type_new;
-    ku_type_get_name;
     ku_context_new;
     ku_context_register_type;
-    ku_symbol_new_type;
+    ku_symbol_new;
+    ku_symbol_get_name;
 local:
     *;
 };

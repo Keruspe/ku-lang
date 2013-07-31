@@ -22,11 +22,10 @@
 
 #include "ku-string.h"
 
+#define KU_TYPE(x) ((KuType *) x)
+
 typedef struct _KuType KuType;
 
-KuType *ku_type_new (KuString *name,
-                     bool      mutable);
-
-const char *ku_type_get_name (KuType *type);
+KuType *ku_type_new (KuString *name);
 
 #endif /*__KU_TYPE_H__*/

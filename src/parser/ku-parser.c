@@ -39,7 +39,7 @@ static KuType *
 parse_type (KuParser *parser)
 {
     KuToken *token = ku_lexer_read_token_no_spaces (parser->lexer);
-    bool mutable = false;
+    bool mutable = false; /* TODO: use me */
     if (ku_token_is_separator (token))
     {
         assert (ku_token_get_separator_value (token) == STAR);
@@ -48,7 +48,7 @@ parse_type (KuParser *parser)
         token = ku_lexer_read_token_no_spaces (parser->lexer);
     }
     assert (ku_token_is_literal (token)); // FIXME: suport built-in types
-    KuType *type = ku_type_new (ku_string_dup (ku_token_get_literal_value (token)), mutable);
+    KuType *type = ku_type_new (ku_string_dup (ku_token_get_literal_value (token)));
     ku_token_free (token);
     return type;
 }
